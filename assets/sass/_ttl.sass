@@ -1,11 +1,6 @@
 .ttl
 	font-weight: normal
 	line-height: 1.2
-	&_main
-		font-size: 5.5rem
-		font-weight: 700
-		line-height: 1.35
-		margin: 0 0 3.5rem
 	&_h1
 		font-size: 3.5rem
 		font-weight: bold
@@ -13,10 +8,43 @@
 		font-size: 4rem
 		font-weight: 600
 	&_h3
-		font-family: $ff3
 		font-size: 2rem
 	&_h4
 		font-size: 16px
+	&_hello
+		color: #ffffff
+		font-size: 8rem
+		font-weight: 600
+		line-height: 1.15
+		margin-bottom: 40px
+	&__tip
+		display: inline-block
+		vertical-align: top
+		margin-top: 10px
+
+.tip
+	position: relative
+	display: inline-block
+	vertical-align: top
+	background: #0C54A0
+	border-radius: 5px
+	color: #ffffff
+	font-size: 1.5rem
+	font-weight: 400
+	line-height: 1.5
+	padding: 10px 20px
+	&:before
+		content: ''
+		display: block
+		background: url('../img/tip-arr.png') 0 0 no-repeat scroll
+		background-size: cover
+		position: absolute
+		top: -12px
+		left: -14px
+		height: 28px
+		width: 28px
+	& > em
+		font-style: normal
 
 // текст над заголовком
 .supttl

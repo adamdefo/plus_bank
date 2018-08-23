@@ -17,7 +17,7 @@ $c_gray: #9fa3a7
 $red: #df4c43
 $green: #0c8d35
 $ff_monserat: 'Montserrat', sans-serif
-$ff: 'Open Sans', Arial, sans-serif
+$ff: 'Arial', Helvetica, sans-serif
 $ff2: 'Peterburg', Times, serif
 $ff3: 'TTInters', Times, serif
 
@@ -91,6 +91,36 @@ p
 				left: 0
 				width: 18px
 				height: 20px
+	&-galka
+		& li
+			display: inline-block
+			vertical-align: top
+			color: #ffffff
+			font-size: 2.4rem
+			margin-right: 45px
+			&:last-child
+				margin-right: 0 
+			&:before
+				content: ''
+				display: inline-block
+				vertical-align: middle
+				background: rgba(255, 255, 255, .1) url('../img/galka.png') center center no-repeat
+				background-size: 50% 50%
+				border-radius: 50%
+				margin-right: 10px
+				width: 56px
+				height: 56px
+			& > span
+				display: inline-block
+				vertical-align: middle
+
+.rubl
+	&:before
+		content: '5'
+		display: inline
+		font-family: 'PT Rouble Sans'
+		font-size: 1.1em
+		line-height: 1
 
 ._hide
 	display: none

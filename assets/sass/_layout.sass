@@ -3,17 +3,11 @@
 	width: 100%
 	z-index: 1
 
-.wrapper
-	position: relative
-	margin: 0 auto
-	padding: 0 20px
-	max-width: 1200px
-
 .container
 	position: relative
-	padding: 0 20px
 	margin: 0 auto
-	max-width: 1200px
+	padding: 0 15px
+	max-width: 1160px
 	width: 100%
 	&:before, &:after
 		clear: both
@@ -159,9 +153,20 @@
 	&_center
 		text-align: center
 	&_hello
-		background-color: #e1e1e1
-		padding: 18rem 0 15rem
+		background: #7eaad8 url('../img/promo-screen.jpg') center center no-repeat scroll
+		background-size: cover
+		padding: 16rem 0 22rem
+		max-height: 752px
 		z-index: 1
+		&:before
+			background-color: #333333
+			content: ''
+			position: absolute
+			top: 0
+			left: 0
+			opacity: .5
+			height: 100%
+			width: 100%
 	&_program
 		padding: 4.5rem 0 5.5rem
 	&_map
