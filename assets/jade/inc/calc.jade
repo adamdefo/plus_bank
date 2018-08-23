@@ -1,0 +1,68 @@
+#calculator.calculator
+  .calculator__inner
+    .calculator__row
+      .calculator__item
+        label.calculator__label Сумма сбережений
+        .calculator__input-box
+          input.calculator__input(type="text")
+        .calculator__rangeslider
+          input#summa(type="range" min="10000" max="300000")
+      .calculator__item
+        label.calculator__label На срок/мес.
+        .calculator__switcher
+          #switcher-month.switcher
+            .switcher__item
+              input#radio-3.switcher__radio(type="radio" value="3" name="month")
+              label.switcher__label.switcher__label_number(for="radio-3") 3
+            .switcher__item
+              input#radio-6.switcher__radio(type="radio" value="6" name="month")
+              label.switcher__label.switcher__label_number(for="radio-6") 6
+            .switcher__item
+              input#radio-12.switcher__radio(type="radio" value="12" name="month")
+              label.switcher__label.switcher__label_number(for="radio-12") 12
+      .calculator__item
+        label.calculator__label Ежемесячное пополнение
+        .calculator__input-box
+          input.calculator__input(type="text")
+        .calculator__rangeslider
+          input#refil(type="range" min="1000" max="100000")
+      .calculator__item
+        label.calculator__label Выплата процентов
+        .calculator__switcher
+          #switcher-percent.switcher
+            .switcher__item.responsive
+              input#radio-in.switcher__radio(type="radio" value="in-end" name="percent")
+              label.switcher__label.switcher__label_txt(for="radio-in") В конце срока
+            .switcher__item.responsive
+              input#radio-every.switcher__radio(type="radio" value="every" name="percent")
+              label.switcher__label.switcher__label_txt(for="radio-every") Ежемесячно
+    .calculator__row
+      label.label-checkbox
+        .checkbox-box
+          input.checkbox(type="checkbox")
+          span.check
+        span <b>1%</b> к ставке пенсионеров
+        
+  .calculator__result
+    .calculator__result-row
+      .calculator__result-item
+        label Вы получите
+        span#total.rubl 234000
+      .calculator__result-item
+        label Доход
+        span#dohod.rubl 34000
+      .calculator__result-item
+        label Ставка
+        span#stavka._green 17
+    .calculator__result-row
+      .calculator__links
+        a.calculator__link(href="#")
+          span Полные условия
+        a.calculator__link(href="#")
+          span График начислений
+        a.calculator__link(href="#")
+          i.icon.icon-save
+          span Сохранить результат
+        a.calculator__link(href="#")
+          i.icon.icon-point
+          span Посмотреть адрес на карте

@@ -1,0 +1,98 @@
+$c1: #29474c // зеленоваты
+$c2: #a0a0a0
+$c3: #5a5a5a
+$c3: #333333
+$c4: #f6f6f6
+$c33: #454553
+$blue: #013bbb
+$pink: #f85f83
+$pink_hover: #EA547B
+$violet: #6537f7
+$blue_bg: rgba(13,118,255,.15)
+$blue_light: #267bfb // rgbf(38,123,251)
+$blue_deep: #175FA7 // rgba(23, 95, 167, .3)
+$color_v: #6C16DE
+$c_gray: #9fa3a7
+// $red: rgb(255,136,123)
+$red: #df4c43
+$green: #0c8d35
+$ff_monserat: 'Montserrat', sans-serif
+$ff: 'Open Sans', Arial, sans-serif
+$ff2: 'Peterburg', Times, serif
+$ff3: 'TTInters', Times, serif
+
+*
+	-webkit-box-sizing: border-box
+	-moz-box-sizing: border-box
+	box-sizing: border-box
+
+html
+	font-size: 10px
+	height: 100%
+
+body
+	background: #FFFFFF
+	color: #1a1a1a
+	font: 400 15px/1.5 $ff
+	margin: 0
+	padding: 0
+
+a
+	border-bottom: 1px solid transparent
+	color: #2e2e2e
+	cursor: pointer
+	outline: none
+	text-decoration: none
+	-webkit-transition: all .15s
+	-moz-transition: all .15s
+	transition: all .15s
+	&:hover
+		border-bottom-color: rgba(255, 109, 57, .3)
+		color: $green
+	&[href^="tel"]
+		border: 0
+
+img
+	max-width: 100%
+	height: auto
+
+p
+	font-size: 1.5rem
+	line-height: 1.5
+	margin-bottom: 1.75em
+
+.center
+	text-align: center
+
+._green
+	color: #0c8d35 !important
+
+._overflow
+	overflow: hidden
+
+.list
+	list-style: none
+	padding: 0
+	margin: 0
+	& li
+		position: relative
+	&-marked
+		& li
+			font-size: 1.8rem
+			font-weight: 600
+			padding-left: 28px
+			margin: 15px 0
+			&:before
+				content: ''
+				position: absolute
+				background: url('../img/mark.png') 0 0 no-repeat
+				background-size: cover
+				top: 0
+				left: 0
+				width: 18px
+				height: 20px
+
+._hide
+	display: none
+._show
+	display: block

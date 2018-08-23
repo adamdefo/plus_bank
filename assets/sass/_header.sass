@@ -1,0 +1,118 @@
+.header
+	background-color: rgba(255, 255, 255, 1)
+	position: fixed
+	width: 100%
+	z-index: 100
+	&__container
+		position: relative
+		margin: 0 auto
+		padding: 2.7rem 4rem 2.5rem
+		max-width: 1920px
+		width: 100%
+	&__logo
+		position: absolute
+		top: 2.7rem
+		left: 4rem
+		text-align: left
+	&__slogan
+		display: block
+		font-family: $ff
+		font-size: 1.35rem
+		padding: 5px 0
+	&__caption
+		display: block
+		font-family: $ff2
+		font-size: 3rem
+		font-weight: bold
+		line-height: 1.5
+	&__nav
+		display: table
+		max-width: 1160px
+		width: 100%
+		height: 59px
+		margin: 0 auto
+		text-align: left
+		& .nav
+			display: table-cell
+			vertical-align: middle
+	&__right
+		position: absolute
+		top: 2.7rem
+		right: 4rem
+		text-align: right
+	&__phone
+		display: block
+		color: #1a1a18
+		font-size: 2.4rem
+		font-weight: 700
+		line-height: 1
+		margin-bottom: 1.35rem
+		&-xs
+			display: none
+	&__callback
+		background-color: #93c11c
+		border: 0
+		border-radius: 4px
+		color: #ffffff
+		font-size: 1.4rem
+		font-weight: 700
+		letter-spacing: .1rem
+		padding: .75rem 1.75rem
+		text-transform: uppercase
+		&:hover
+			background-color: #afda41
+			color: #ffffff
+		&:active
+			background-color: #0c8d35
+
+.logo
+	border: 0
+	display: inline-block
+	vertical-align: middle
+	width: 181px
+
+@media (max-width: 1600px)
+	.header
+		&__nav
+			max-width: 920px
+			margin-left: 211px
+@media (max-width: 1250px)
+	.header
+		&__container
+			padding: 2.7rem 2rem 3.5rem
+		&__nav
+			max-width: 720px
+			margin-left: 231px
+@media (max-width: 1130px)
+	.header
+		&__container
+			padding: 2.7rem 2rem 2.5rem
+		&__nav
+			max-width: 630px
+@media (max-width: 980px)
+	.header
+		&__container
+			padding: 1rem 2rem
+		&__nav
+			display: none
+		&__logo
+			position: relative
+			top: 0
+			left: 0
+			display: inline-block
+			vertical-align: middle
+		&__phone
+			margin-bottom: 0 
+			font-size: 3rem
+		&__phone-xs
+			display: inline-block
+			vertical-align: middle
+			margin-left: 2rem
+		&__right
+			display: none
+	.logo
+		width: 170px
+@media (max-width: 580px)
+	.header
+		&__phone-xs
+			display: none

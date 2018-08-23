@@ -1,0 +1,61 @@
+doctype html
+html
+	include inc/head
+	body
+		.layout
+			include inc/header
+			main.main
+				include inc/hello
+				include inc/programs
+				.ui
+					.checkbox
+						label.checkbox__label
+							input.checkbox__input(type="checkbox")
+							.checkbox__el
+							span.checkbox__caption Чекбокс
+				section.section.section_map
+					#map.map
+					.map__box
+						.map__inner
+							.map__content
+								.map__content-row
+									label Адрес:
+									p г. Ульяновск, 2-й пер. Мира,<br> д. 28/3 помещение 6-10
+								.map__content-row
+									label Телефон:
+									p 
+										a(href="tel:+8422425071")
+											span +7 (8422) 42-50-71
+								.map__content-row
+									label Телефон:
+									p Будни с 9:00 до 19:00;<br> Суббота: с 10:00 до 13:00,<br> Воскресенье: выходной
+
+
+		include inc/footer
+		.md.md-callback
+			.md__overlay
+			.md__container
+				.md__inner
+					.md-close.js-md-close Закрыть
+					.md__header
+						.title Заявка на обратный звонок
+					.md__content
+						form.form.js-form-callback(action="ajax/callback.php" method="POST")
+							.form__item
+								input.form__input(placeholder="Имя" name="name")
+							.form__item
+								input.form__input.js-phone(placeholder="Введите ваш номер" name="phone")
+							.form__item
+								.checkbox-box
+									label
+										input(type="checkbox" name="isAgree")
+										span Согласен а обработку перс. данных
+							.form__button
+								button.btn.js-send-callback(type="button" disabled) Перезвоните мне
+								.caption Перезвоним в течение 15 минут
+						.answer-form
+							.answer-form__txt Специалист перезвонит вам по номеру
+							.answer-form__phone
+								strong
+							.answer-form__btn
+								button.btn(type="button") Хорошо

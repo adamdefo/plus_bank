@@ -1,0 +1,269 @@
+.layout
+	position: relative
+	width: 100%
+	z-index: 1
+
+.wrapper
+	position: relative
+	margin: 0 auto
+	padding: 0 20px
+	max-width: 1200px
+
+.container
+	position: relative
+	padding: 0 20px
+	margin: 0 auto
+	max-width: 1200px
+	width: 100%
+	&:before, &:after
+		clear: both
+		content: ''
+		display: block
+		height: 0
+
+.main
+	position: relative
+	width: 100%
+
+.bottom
+	margin-top: 4.5rem
+
+
+.b-calculator
+	position: relative
+	margin-top: -110px
+	width: 100%
+	z-index: 10
+
+@media (max-width: 768px)
+	.b-calculator
+		& > .container
+			padding: 0
+
+.switcher
+	&__item
+		position: relative
+		display: inline-block
+		vertical-align: top
+		margin-left: -5px
+		&:first-child
+			margin-left: 0
+			& .switcher__label
+				border-radius: 2px 0 0 2px
+				margin-left: 0
+		&:last-child 
+			& .switcher__label
+				border-radius: 0 2px 2px 0
+	&__radio
+		position: absolute
+		opacity: 0
+		&:checked + .switcher__label
+			position: relative
+			background-color: #0a7a2e
+			border: 0
+			border-radius: 2px
+			color: #ffffff
+			z-index: 10
+		&:checked + .switcher__label_number
+			padding-top: 15px
+			padding-bottom: 15px
+		&:checked + .switcher__label_txt
+			padding-top: 19px
+			padding-bottom: 19px
+	&__label
+		display: inline-block
+		vertical-align: top
+		background-color: #ffffff
+		border: 1px solid #e1e1e1
+		border-radius: 0
+		color: #000000
+		font-size: 2.4rem
+		font-weight: 700
+		line-height: 1
+		padding: 14px 20px
+		text-align: center
+		&:hover
+			background-color: #f5f5f5
+			cursor: pointer
+		&_number
+			width: 54px
+			padding: 14px 10px
+		&_txt
+			font-size: 1.6rem
+			padding: 18px 30px
+
+@media (max-width: 768px)
+	.switcher
+		&__item.responsive
+			width: 50%
+		&__item.responsive &__label
+			font-size: 1.8rem
+			padding: 24px 10px
+			width: 100%
+		&__item.responsive &__radio
+			&:checked + .switcher__label_txt
+				padding-top: 25px
+				padding-bottom: 25px
+@media (max-width: 480px)
+	.switcher
+		&__item.responsive &__label
+			font-size: 1.35rem
+			padding: 24px 0
+
+.master-klass
+	display: table
+	position: relative
+	width: 100%
+	&__item
+		display: table-cell
+		vertical-align: top
+		text-align: left
+		width: 33%
+	&__pic
+		max-width: 265px
+		width: 100%
+		margin-bottom: 3.5rem
+		& img
+			margin: 0 auto
+	&__title
+		position: relative
+		font-size: 1.5rem
+		font-weight: bold
+		margin-bottom: 1.5rem
+		&:before
+			position: absolute
+			top: -18px
+			left: -10px
+			color: rgba(38, 123, 251, .25)
+			content: attr(data-number)
+			speak: none
+			font-size: 5rem
+			font-weight: bold
+			font-variant: normal
+			line-height: 1
+			-webkit-font-smoothing: antialiased
+			-moz-osx-font-smoothing: grayscale
+	&__txt
+		font-size: 1.25rem
+		line-height: 1.35
+
+.section
+	position: relative
+	padding: 2.5rem 0 4.5rem
+	width: 100%
+	z-index: 10
+	& .content
+		position: relative
+		width: 100%
+		z-index: 5
+	&_center
+		text-align: center
+	&_hello
+		background-color: #e1e1e1
+		padding: 18rem 0 15rem
+		z-index: 1
+	&_program
+		padding: 4.5rem 0 5.5rem
+	&_map
+		padding: 0
+	&_page
+		margin: 4.5rem 0 1.5rem
+	&__title
+		margin-bottom: 6rem
+		& .ttl
+			color: #3d3d3d
+			margin-bottom: 3rem
+		& .subttl
+			color: #71737b
+
+	&_slider
+		background-color: #292a33
+		height: 100vh
+		max-height: 800px
+
+@media (max-width: 980px)
+	.section
+		&_hello
+			padding: 12rem 0
+		&_program
+			padding-bottom: 3.5rem
+
+.phone a
+	font-size: 1.5em
+	color: #333333
+
++keyframes(fadeUp)
+	0%
+		opacity: 0
+		transform: translate3d(0, 30px, 0)
+	100%
+		transform: translate3d(0, 0, 0)
+
+.chain__list
+	margin: 0
+	padding: 0
+.chain__item
+	display: inline-block
+	vertical-align: middle
+	color: $c1
+	font-size: 10px
+	font-weight: 300
+	text-transform: uppercase
+	&:last-child
+		margin-right: 0
+.chain__item + .chain__item:before
+	content: '/'
+	display: inline-block
+	vertical-align: middle
+	margin-right: 4px
+.chain__link
+	display: inline-block
+	vertical-align: middle
+	border: none
+	color: $c1
+	.chain__link:hover
+		color: $red
+
+.map
+	width: 100%
+	height: 700px
+
+	&__box
+		position: absolute
+		top: 110px
+		left: 50%
+		margin-left: 100px
+	&__inner
+		width: 300px
+		background: #fff
+		box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.3)
+		border-radius: 1px
+	&__content
+		font-size: 1.8rem
+		&-row
+			padding: 2rem
+			&:last-child
+				margin-bottom: 0
+			label
+				display: block
+				color: #2a2a2a
+				font-weight: 700
+				margin-bottom: .5rem
+			p
+				color: #636363
+				line-height: 1.5
+				margin: 0
+
+@media (max-width: 980px)
+	.map
+		height: 400px
+		&__box
+			top: 50px
+			left: 0
+			margin-left: 0
+			width: 100%
+		&__inner
+			margin: 0 auto
+			max-width: 350px
+			width: 100%
+

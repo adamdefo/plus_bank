@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'PT Rouble Sans';
+    src: url('./fonts/hinted-PTRoubleSans.eot');
+    src: url('./fonts/hinted-PTRoubleSans.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/hinted-PTRoubleSans.woff') format('woff'),
+        url('./fonts/hinted-PTRoubleSans.ttf') format('truetype'),
+        url('./fonts/hinted-PTRoubleSans.svg#PTRoubleSans') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

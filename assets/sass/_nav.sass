@@ -1,0 +1,99 @@
+.nav
+	display: block
+	margin: 0
+	padding: 0
+	max-width: 100%
+	&__list
+		margin: 0
+		padding: 0
+	&__item
+		position: relative
+		display: inline-block
+		vertical-align: top
+		font-size: 1.8rem
+		font-weight: 600
+		margin-right: 5.4rem
+		&:last-child
+			margin-right: 0
+	&__link
+		border-bottom: 1px dashed #969696
+		color: #2e2e2e
+		padding-bottom: .3rem
+		&:hover
+			border-color: #85c69a
+			color: #0c8d35
+		&._active
+			border: 0
+			color: #0c8d35
+		& span
+			position: relative
+			display: inline-block
+			vertical-align: middle
+	&-xs
+		display: none
+		position: absolute
+		top: 0
+		left: 0
+		background-color: rgba(0,0,0,.95)
+		width: 100%
+		height: 100vh
+		z-index: 999
+		&._show
+			display: block
+		&__container
+			position: relative
+			width: 100%
+			height: 100%
+			overflow: auto
+		&__box
+			position: relative
+			display: table
+			width: 100%
+			height: 100%
+		&__list
+			display: table-cell
+			vertical-align: middle
+			width: 100%
+		&__item
+			display: block
+			font-size: 2.5rem
+			text-align: center
+		&__link
+			display: block
+			border: 0
+			padding: 2rem 0
+			color: #ffffff
+		&__close
+			position: fixed
+			top: 10px
+			right: 10px
+			width: 40px
+			height: 40px
+			background-image: url(data:image/svg+xml;base64,PHN2Zw0KICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIg0KICAgdmVyc2lvbj0iMS4xIg0KICAgdmlld0JveD0iMCAwIDIxIDIxIg0KICAgaGVpZ2h0PSIyMSINCiAgIHdpZHRoPSIyMSI+DQogIDxnDQogICAgIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsLTEwMzEuMzYyMikiPg0KICAgIDxyZWN0DQogICAgICAgdHJhbnNmb3JtPSJtYXRyaXgoMC43MDcxMDY3OSwwLjcwNzEwNjc3LC0wLjcwNzEwNjc5LDAuNzA3MTA2NzcsMCwwKSINCiAgICAgICB5PSI3MjguNzgyNjUiDQogICAgICAgeD0iNzI5Ljc4Mzc1Ig0KICAgICAgIGhlaWdodD0iMS4wMDEwNTczIg0KICAgICAgIHdpZHRoPSIyOC42OTc0MjgiDQogICAgICAgc3R5bGU9ImZpbGw6I2ZmZjtmaWxsLW9wYWNpdHk6MTtzdHJva2U6bm9uZTtzdHJva2Utd2lkdGg6MS43MDAwMDAwNTtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlLW1pdGVybGltaXQ6NDtzdHJva2UtZGFzaGFycmF5Om5vbmUiIC8+DQogICAgPHJlY3QNCiAgICAgICB0cmFuc2Zvcm09Im1hdHJpeCgtMC43MDc0ODAyOSwwLjcwNjczMzA3LC0wLjcwNzQ4MDI5LC0wLjcwNjczMzA3LDAsMCkiDQogICAgICAgeT0iLTc0NS4wMjYxOCINCiAgICAgICB4PSI3MTUuMzQzMzIiDQogICAgICAgaGVpZ2h0PSIxLjAwMDUyODgiDQogICAgICAgd2lkdGg9IjI4LjY4MjI3OCINCiAgICAgICBzdHlsZT0iZmlsbDojZmZmO2ZpbGwtb3BhY2l0eToxO3N0cm9rZTpub25lO3N0cm9rZS13aWR0aDoxLjcwMDAwMDA1O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZSIgLz4NCiAgPC9nPg0KPC9zdmc+DQo=)
+			background-color: transparent
+			background-position: center center
+			background-repeat: no-repeat
+			border: 0
+			text-indent: 9999px
+			outline: none
+			cursor: pointer
+			z-index: 1000
+
+.burger
+	display: none
+	position: absolute
+	top: 24px
+	right: 20px
+	width: 36px
+	height: 29px
+	background: url('../img/burger.png') 0 0 no-repeat
+	border: 0
+	outline: none
+
+@media (max-width: 1600px)
+	.nav__item
+		font-size: 1.8rem
+		margin-right: 3rem
+@media (max-width: 980px)
+	.burger
+		display: block
