@@ -1,12 +1,52 @@
 .footer
-  position: relative
-  background-color: #FFFFFF
-  border-top: 1px solid #F0E8E8
-  color: #b3b3b3
-  font-size: 1.35rem
-  padding: 3rem 0
-  // margin-top: -172px
-  &__copyright
-      font-weight: 300
-      margin-top: 1em
-      text-align: center
+	position: relative
+	background-color: #0C54A0
+	color: #ffffff
+	font-size: 1.6rem
+	line-height: 1.5
+	padding: 6rem 0 10rem
+	z-index: 1
+	& .row
+		margin: 0 -20px
+	.footer__logo
+		background: #ffffff
+		border-radius: 5px
+		font-size: 0
+		line-height: 0
+		padding: 10px
+		width: 224px
+	&__item
+		float: left
+		display: inline-block
+		vertical-align: middle
+		padding: 15px 20px 0
+		&:first-child
+			padding-top: 0
+		&_it-agency
+			text-align: right
+		&.col1
+			width: 280px
+		&.col2
+			width: 250px
+		&.col3
+			width: 370px
+
+.it-agency
+	position: relative
+	line-height: 1.25
+	padding-left: 127px
+	text-align: left
+	& a
+		border-bottom: 1px solid rgba(255,255,255,.25)
+		color: #ffffff
+		-webkit-transition: all .25s
+		-moz-transition: all .25s
+		transition: all .25s
+		&:hover 
+			border-bottom-color: transparent
+	& img
+		position: absolute
+		top: 3px
+		left: 0
+		width: 117px
+		height: 16px

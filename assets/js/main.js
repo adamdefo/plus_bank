@@ -14,31 +14,31 @@ var validateEmail = function(email) {
 }
 
 $(function() {
-	var calculator = new Calculator('#calculator');
+	// var calculator = new Calculator('#calculator');
 
-	$('#summa').rangeslider({
-		polyfill: false,
-		onInit: function() {
-			this.value = calculator._params.summa;
-		},
-		onSlide: function(position, value) {
-			calculator.updateInputValue(calculator.summaCtrl, value);
-			calculator.calculate();
-		},
-		onSlideEnd: function(position, value) {}
-	});
+	// $('#summa').rangeslider({
+	// 	polyfill: false,
+	// 	onInit: function() {
+	// 		this.value = calculator._params.summa;
+	// 	},
+	// 	onSlide: function(position, value) {
+	// 		calculator.updateInputValue(calculator.summaCtrl, value);
+	// 		calculator.calculate();
+	// 	},
+	// 	onSlideEnd: function(position, value) {}
+	// });
 
-	$('#refil').rangeslider({
-		polyfill: false,
-		onInit: function() {
-			this.value = calculator._params.refil;
-		},
-		onSlide: function(position, value) {
-			calculator.updateInputValue(calculator.refilCtrl, value);
-			calculator.calculate();
-		},
-		onSlideEnd: function(position, value) {}
-	});
+	// $('#refil').rangeslider({
+	// 	polyfill: false,
+	// 	onInit: function() {
+	// 		this.value = calculator._params.refil;
+	// 	},
+	// 	onSlide: function(position, value) {
+	// 		calculator.updateInputValue(calculator.refilCtrl, value);
+	// 		calculator.calculate();
+	// 	},
+	// 	onSlideEnd: function(position, value) {}
+	// });
 
 	// маска номера телефона
 	$('.js-phone').mask('+7 (999) 999-9999');
@@ -162,26 +162,26 @@ $(function() {
 });
 
 var myMap, myPlacemark;
-ymaps.ready(initMap);
-function initMap() { 
-	myMap = new ymaps.Map("map", {
-		center: [54.32255725910652,48.401403088097844],
-		zoom: 18,
-		controls: ['zoomControl']
-	});
-	myPlacemark = new ymaps.Placemark(
-		myMap.getCenter(), 
-		{
-			hintContent: 'Подсказка',
-			balloonContent: 'Содержимое метки'
-		},
-		{
-			iconLayout: 'default#image',
-            iconImageHref: '../img/point_hover.png',
-            iconImageSize: [54, 78],
-            iconImageOffset: [-20, -54]
-		}
-	);
-	myMap.geoObjects.add(myPlacemark);
-	myMap.behaviors.disable('scrollZoom');
-};
+// ymaps.ready(initMap);
+// function initMap() { 
+// 	myMap = new ymaps.Map("map", {
+// 		center: [54.32255725910652,48.401403088097844],
+// 		zoom: 18,
+// 		controls: ['zoomControl']
+// 	});
+// 	myPlacemark = new ymaps.Placemark(
+// 		myMap.getCenter(), 
+// 		{
+// 			hintContent: 'Подсказка',
+// 			balloonContent: 'Содержимое метки'
+// 		},
+// 		{
+// 			iconLayout: 'default#image',
+//             iconImageHref: '../img/point_hover.png',
+//             iconImageSize: [54, 78],
+//             iconImageOffset: [-20, -54]
+// 		}
+// 	);
+// 	myMap.geoObjects.add(myPlacemark);
+// 	myMap.behaviors.disable('scrollZoom');
+// };

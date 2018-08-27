@@ -2,17 +2,20 @@
 	position: fixed
 	width: 100%
 	z-index: 100
+	& a
+		-webkit-transition: all .25s
+		-moz-transition: all .25s
+		transition: all .25s
 	&__container
 		position: relative
 		margin: 0 auto
-		padding: 2.7rem 4rem 2.5rem
-		max-width: 1920px
+		padding: 20px 20px 25px
+		max-width: 1170px
 		width: 100%
 	&__logo
-		position: absolute
-		top: 2.7rem
-		left: 4rem
-		text-align: left
+		display: inline-block
+		vertical-align: middle
+		margin-right: 115px
 	&__slogan
 		display: block
 		font-family: $ff
@@ -25,27 +28,23 @@
 		font-weight: bold
 		line-height: 1.5
 	&__nav
-		display: table
-		max-width: 1160px
-		width: 100%
-		height: 59px
-		margin: 0 auto
-		text-align: left
+		display: inline-block
+		vertical-align: middle
 		& .nav
 			display: table-cell
 			vertical-align: middle
 	&__right
-		position: absolute
-		top: 2.7rem
-		right: 4rem
+		float: right
+		padding-top: 10px
 		text-align: right
 	&__phone
+		background: rgba(255, 255, 255, 0.1)
+		border-radius: 5px
 		display: block
-		color: #1a1a18
-		font-size: 2.4rem
-		font-weight: 700
+		color: #ffffff
+		font-size: 1.8rem
 		line-height: 1
-		margin-bottom: 1.35rem
+		padding: 11px 7px
 		&-xs
 			display: none
 	&__callback

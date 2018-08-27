@@ -16,6 +16,7 @@ $c_gray: #9fa3a7
 // $red: rgb(255,136,123)
 $red: #df4c43
 $green: #0c8d35
+$link_hover: #EE741D
 $ff_monserat: 'Montserrat', sans-serif
 $ff: 'Arial', Helvetica, sans-serif
 $ff2: 'Peterburg', Times, serif
@@ -43,12 +44,8 @@ a
 	cursor: pointer
 	outline: none
 	text-decoration: none
-	-webkit-transition: all .15s
-	-moz-transition: all .15s
-	transition: all .15s
 	&:hover
-		border-bottom-color: rgba(255, 109, 57, .3)
-		color: $green
+		color: $link_hover
 	&[href^="tel"]
 		border: 0
 
@@ -115,7 +112,7 @@ p
 				vertical-align: middle
 
 .rubl
-	&:before
+	&:after
 		content: '5'
 		display: inline
 		font-family: 'PT Rouble Sans'
