@@ -56,7 +56,7 @@ img
 p
 	font-size: 1em
 	line-height: 1.5
-	margin-bottom: 1.25em
+	margin: 0 0 1.15em
 
 .center
 	text-align: center
@@ -73,6 +73,9 @@ p
 	margin: 0
 	& li
 		position: relative
+		&:before
+			content: '—'
+			display: inline
 	&-marked
 		& li
 			font-size: 1.8rem
