@@ -26,17 +26,17 @@
 		// инпут Сумма
 		this.summaCtrl = this.inputs[0];
 		// инпут Пополнение
-		this.refilCtrl = this.inputs[1];
+		// this.refilCtrl = this.inputs[1];
+		// Срок
+		this.period = this.el.querySelector('#calculator-period');
 		// свичеры
 		this.switchers = this.el.querySelectorAll('.calculator__switcher > .switcher');
-		this.monthSwitchCtrl = this.switchers[0].querySelectorAll('.switcher__radio');
-		this.percentSwitchCtrl = this.switchers[1].querySelectorAll('.switcher__radio');
+		// this.monthSwitchCtrl = this.switchers[0].querySelectorAll('.switcher__radio');
+		this.percentSwitchCtrl = this.switchers[0].querySelectorAll('.switcher__radio');
 		// 3/6/12
 		this.month;
 		// в конце срока/ежемесячно
 		this.percent;
-		// чекбокс
-		this.checkbox = this.el.querySelector('.checkbox');
 		// итого
 		this.$total = this.el.querySelector('#total');
 		this.total;
@@ -60,7 +60,7 @@
 
 	Calculator.prototype._init = function () {
 		this.summaCtrl.value = this._params.summa;
-		this.refilCtrl.value = this._params.refil;
+		// this.refilCtrl.value = this._params.refil;
 		this.month = this._params.month;
 		this.percent = this._params.percent;
 
@@ -72,9 +72,9 @@
 	// установка активного пункта у свичеров
 	Calculator.prototype._initSwitchers = function () {
 		var self = this;
-		this.monthSwitchCtrl.forEach(function(ctrl) {
-			ctrl.checked = +ctrl.value === self.month;
-		});
+		// this.monthSwitchCtrl.forEach(function(ctrl) {
+		// 	ctrl.checked = +ctrl.value === self.month;
+		// });
 
 		this.percentSwitchCtrl.forEach(function(ctrl) {
 			ctrl.checked = ctrl.value === self.percent;
@@ -92,16 +92,16 @@
 			self.calculate();
 		});
 
-		this.refilCtrl.addEventListener('change', function() {
-			self.calculate();
-		});
+		// this.refilCtrl.addEventListener('change', function() {
+		// 	self.calculate();
+		// });
 
-		this.monthSwitchCtrl.forEach(function(ctrl) {
-			ctrl.addEventListener('change', function(ev) {
-				self.month = this.value;
-				self.calculate();
-			});
-		});
+		// this.monthSwitchCtrl.forEach(function(ctrl) {
+		// 	ctrl.addEventListener('change', function(ev) {
+		// 		self.month = this.value;
+		// 		self.calculate();
+		// 	});
+		// });
 
 		this.percentSwitchCtrl.forEach(function(ctrl) {
 			ctrl.addEventListener('change', function(ev) {
@@ -110,28 +110,26 @@
 			});
 		});
 
-		this.checkbox.addEventListener('change', function() {
-			if (this.checked) {
-				classie.add(this, '_checked');
-				self._params.stavka += 1;
-			} else {
-				classie.remove(this, '_checked');
-				self._params.stavka -= 1;
-			}
-			self.calculate();
-		});
+		// this.checkbox.addEventListener('change', function() {
+		// 	if (this.checked) {
+		// 		classie.add(this, '_checked');
+		// 		self._params.stavka += 1;
+		// 	} else {
+		// 		classie.remove(this, '_checked');
+		// 		self._params.stavka -= 1;
+		// 	}
+		// 	self.calculate();
+		// });
 
 		Calculator.prototype.calculate = function () {
 			this.$stavka.innerText = this._params.stavka + '%';
-			this.total = Number(this.summaCtrl.value) + Number(this.refilCtrl.value*this.month);
-			if (this.checkbox.checked) {
-				this.total += this.total * 0.01;
-			}
+			this.total = Number(this.summaCtrl.value);
+			// this.total = Number(this.summaCtrl.value) + Number(this.refilCtrl.value*this.month);
 			this.$total.innerText = this.total;
-			this.dohod = Number(this.refilCtrl.value*this.month);
-			if (this.checkbox.checked) {
-				this.dohod += this.dohod * 0.01;
-			}
+			// this.dohod = Number(this.refilCtrl.value*this.month);
+			// if (this.checkbox.checked) {
+			// 	this.dohod += this.dohod * 0.01;
+			// }
 			this.$dohod.innerText = this.dohod;
 		};
 	};
