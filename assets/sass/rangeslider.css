@@ -31,7 +31,7 @@
 }
 
 .rangeslider__fill {
-  background: #00ff00;
+  background: #EE741D;
   position: absolute;
 }
 .rangeslider--horizontal .rangeslider__fill {
@@ -44,15 +44,15 @@
 }
 
 .rangeslider__handle {
-  background: #0c8d35;
+  background: #EE741D;
   cursor: pointer;
   display: inline-block;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   position: absolute;
-  -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
@@ -66,6 +66,7 @@
   background-image: -moz-linear-gradient(rgba(255, 255, 255, 1), rgba(215, 215, 215, 1));
   background-image: -webkit-linear-gradient(rgba(255, 255, 255, 1), rgba(215, 215, 215, 1));
   background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(215, 215, 215, 1));
+  border-radius: 50%;
   opacity: .15;
 }
 
@@ -76,7 +77,7 @@
   background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.12));
 }
 .rangeslider--horizontal .rangeslider__handle {
-  top: -12px;
+  top: -10px;
   touch-action: pan-y;
   -ms-touch-action: pan-y;
 }

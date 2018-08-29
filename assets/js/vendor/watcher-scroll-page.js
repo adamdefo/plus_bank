@@ -1,33 +1,38 @@
-var watcherScrollPage = (function() {
-	var docElem = document.documentElement,
-		header = document.querySelector( '.js-header' ),
-		didScroll = false,
-		changeHeaderOn = 300;
+;(function(window) {
 
-	function init() {
-		window.addEventListener( 'scroll', function( event ) {
-			if( !didScroll ) {
-				didScroll = true;
-				setTimeout( scrollPage, 250 );
+	var WatcherScrollPage = function () {
+		var docElem = document.documentElement,
+			header = document.querySelector( '.js-header' ),
+			didScroll = false,
+			changeHeaderOn = 100;
+
+		function init() {
+			window.addEventListener( 'scroll', function( event ) {
+				if( !didScroll ) {
+					didScroll = true;
+					setTimeout( scrollPage, 250 );
+				}
+			}, false );
+		}
+
+		function scrollPage() {
+			var sy = scrollY();
+			if ( sy >= changeHeaderOn ) {
+				classie.add( header, 'header--fixed' );
 			}
-		}, false );
-	}
-
-	function scrollPage() {
-		var sy = scrollY();
-		if ( sy >= changeHeaderOn ) {
-			classie.add( header, '.header-scrolling' );
+			else {
+				classie.remove( header, 'header--fixed' );
+			}
+			didScroll = false;
 		}
-		else {
-			classie.remove( header, '.header-scrolling' );
+
+		function scrollY() {
+			return window.pageYOffset || docElem.scrollTop;
 		}
-		didScroll = false;
+
+		init();
 	}
 
-	function scrollY() {
-		return window.pageYOffset || docElem.scrollTop;
-	}
+	window.WatcherScrollPage = WatcherScrollPage;
 
-	// init();
-
-})();
+})(window);
