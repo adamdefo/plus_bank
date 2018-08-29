@@ -15,31 +15,31 @@ var validateEmail = function(email) {
 
 $(function() {
 	var watcherSP = new WatcherScrollPage();
-	var calculator = new Calculator('#calculator');
+	var calcApp = new Calculator('#calculator');
 
-	$('#summa').rangeslider({
+	var $summaSlider = $('#summa-slider');
+	$summaSlider.rangeslider({
 		polyfill: false,
-		onInit: function() {
-			this.value = calculator._params.summa;
-		},
 		onSlide: function(position, value) {
-			calculator.updateInputValue(calculator.summaCtrl, value);
+			calcApp.updateInputValue(calcApp.$summaCtrl, value, 'summa');
+			calcApp.calculate();
+		},
+		onSlideEnd: function(position, value) {}
+	});
+	var $summaInput = $('.summa');
+	$summaInput.on('change', function () {
+		$summaSlider.val(this.value).change();
+	});
+
+	var $refilSlider = $('#refil-slider');
+	$refilSlider.rangeslider({
+		polyfill: false,
+		onSlide: function(position, value) {
+			calculator.updateInputValue(calculator.$refilCtrl, value, 'refil');
 			calculator.calculate();
 		},
 		onSlideEnd: function(position, value) {}
 	});
-
-	// $('#refil').rangeslider({
-	// 	polyfill: false,
-	// 	onInit: function() {
-	// 		this.value = calculator._params.refil;
-	// 	},
-	// 	onSlide: function(position, value) {
-	// 		calculator.updateInputValue(calculator.refilCtrl, value);
-	// 		calculator.calculate();
-	// 	},
-	// 	onSlideEnd: function(position, value) {}
-	// });
 
 	// маска номера телефона
 	$('.js-phone').mask('+7 (999) 999-9999');
@@ -87,8 +87,8 @@ $(function() {
 		}, 300);
 	}
 
-	$sendCallback.addEventListener('click', function(event) {
-		event.preventDefault();
+	$sendCallback.addEventListener('click', function(ev) {
+		ev.preventDefault();
 		var error = 0;
 	
 		var name = $clientName.value;
@@ -162,27 +162,27 @@ $(function() {
 
 });
 
-var myMap, myPlacemark;
+var yaMap, placeMark;
 ymaps.ready(initMap);
 function initMap() { 
-	myMap = new ymaps.Map("map", {
+	yaMap = new ymaps.Map('map', {
 		center: [54.32255725910652,48.401403088097844],
 		zoom: 18,
 		controls: ['zoomControl']
 	});
-	myPlacemark = new ymaps.Placemark(
-		myMap.getCenter(), 
+	placeMark = new ymaps.Placemark(
+		yaMap.getCenter(), 
 		{
 			hintContent: 'Подсказка',
 			balloonContent: 'Содержимое метки'
 		},
 		{
 			iconLayout: 'default#image',
-            iconImageHref: '../img/metka.png',
-            iconImageSize: [46, 63],
-            iconImageOffset: [-20, -54]
+			iconImageHref: '../img/metka.png',
+			iconImageSize: [46, 63],
+			iconImageOffset: [-20, -54]
 		}
 	);
-	myMap.geoObjects.add(myPlacemark);
-	myMap.behaviors.disable('scrollZoom');
-};
+	yaMap.geoObjects.add(placeMark);
+	yaMap.behaviors.disable('scrollZoom');
+}

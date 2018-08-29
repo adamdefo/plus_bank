@@ -1,6 +1,8 @@
 /**
- * Aleksey Kondratyev
- *
+ * 
+ * @author Aleksey Kondratyev
+ * @description Кальлятор по расчёту доходов по вкладам
+ * 
  */
 ;(function(window) {
 
@@ -20,118 +22,144 @@
 		this._params = extend({}, this._params);
 		extend(this._params, params);
 
-		this.el = document.querySelector(selector);
-		// инпуты
-		this.inputs = this.el.querySelectorAll('.calculator__input');
-		// инпут Сумма
-		this.summaCtrl = this.inputs[0];
-		// инпут Пополнение
-		// this.refilCtrl = this.inputs[1];
-		// Срок
-		this.period = this.el.querySelector('#calculator-period');
-		// свичеры
-		this.switchers = this.el.querySelectorAll('.calculator__switcher > .switcher');
-		// this.monthSwitchCtrl = this.switchers[0].querySelectorAll('.switcher__radio');
-		this.percentSwitchCtrl = this.switchers[0].querySelectorAll('.switcher__radio');
-		// 3/6/12
-		this.month;
-		// в конце срока/ежемесячно
-		this.percent;
-		// итого
-		this.$total = this.el.querySelector('#total');
-		this.total;
-		// доход
-		this.$dohod = this.el.querySelector('#dohod');
-		this.dohod;
+		this.$el = document.querySelector(selector);
+
+		// сумма
+		this.$summaCtrl = this.$el.querySelector('.summa');
+		this.$summaSlider = this.$el.querySelector('#summa-slider');
+
+		// пополнение в месяц
+		this.$refilCtrl = this.$el.querySelector('.refil');
+
+		// селект со сроками
+		this.$periodSelect = this.$el.querySelector('#period-select');
+
+		// свичер
+		this.$switcherPercentEl = this.$el.querySelector('#switcher-percent');
+		this.$switcherPercentCtrl = this.$switcherPercentEl.querySelectorAll('.switcher__radio');
+		this.percentType;
+
+		// сколько получит клиент
+		this.$totalEl = this.$el.querySelector('.total');
+		this.total = 0;
+
+		// общий доход
+		this.$profitEl = this.$el.querySelector('.profit'); 
+		this.profit = 0;
+
+		// доход в месяц 
+		this.$profitInMonthEl = this.$el.querySelector('.profit-in-month');
+		this.profitInMonth;
+
 		// ставка
-		this.$stavka = this.el.querySelector('#stavka');
-		this.stavka;
+		this.$rateEl = this.$el.querySelector('.rate');
+
+		// срок
+		this.$periodEl = this.$el.querySelector('.period');
 
 		this._init();
 	};
 
 	Calculator.prototype._params = {
-		summa: 200000, //
-		refil: 2000, //
-		month: 12,
-		percent: 'every',
-		stavka: 17
+		summa: 1000000, // сумма
+		refil: 1000, // пополнение
+		percentType: 'every-month', // выплата процентов
+		rate: 8,
+		period: 6 // срок
 	};
 
 	Calculator.prototype._init = function () {
-		this.summaCtrl.value = this._params.summa;
-		// this.refilCtrl.value = this._params.refil;
-		this.month = this._params.month;
-		this.percent = this._params.percent;
-
-		this._initSwitchers();
+		this._initCtrls();
 		this._initEvents();
 		this.calculate();
 	};
 
-	// установка активного пункта у свичеров
-	Calculator.prototype._initSwitchers = function () {
+	Calculator.prototype._initCtrls = function () {
 		var self = this;
-		// this.monthSwitchCtrl.forEach(function(ctrl) {
-		// 	ctrl.checked = +ctrl.value === self.month;
-		// });
 
-		this.percentSwitchCtrl.forEach(function(ctrl) {
-			ctrl.checked = ctrl.value === self.percent;
+		// проставляет в инпуте значение
+		this.$summaCtrl.value = this._params.summa
+		this.$summaSlider.value = this._params.summa;
+
+		if (this.$refilCtrl) {
+			this.$refilCtrl.value = this._params.refil;
+			this.$refilSlider.value = this._params.refil;
+		}
+
+		// проставляет селект
+		this.$periodSelect.value = this._params.period
+
+		// выставляет свичер
+		this.$switcherPercentCtrl.forEach(function(ctrl) {
+			ctrl.checked = ctrl.value === self._params.percentType;
 		});
 	};
 
-	Calculator.prototype.updateInputValue = function (input, value) {
+	Calculator.prototype.updateInputValue = function (input, value, paramKey) {
 		input.value = value;
+		this._params[paramKey] = value
 	};
 
 	Calculator.prototype._initEvents = function () {
 		var self = this;
 
-		this.summaCtrl.addEventListener('change', function() {
+		this.$summaCtrl.addEventListener('change', function () {
+			self._params.summa = this.value;
 			self.calculate();
 		});
 
-		// this.refilCtrl.addEventListener('change', function() {
-		// 	self.calculate();
-		// });
+		// this.$summaCtrl.addEventListener('keyup', function () {
+		// 	console.log(this.value)
+		// 	self.$summaSlider.value = this.value;
 
-		// this.monthSwitchCtrl.forEach(function(ctrl) {
-		// 	ctrl.addEventListener('change', function(ev) {
-		// 		self.month = this.value;
+		// 	if (this.value != self._params.summa) {
 		// 		self.calculate();
-		// 	});
+		// 	}
 		// });
 
-		this.percentSwitchCtrl.forEach(function(ctrl) {
-			ctrl.addEventListener('change', function(ev) {
-				self.percent = this.value;
+		if (this.$refilCtrl) {
+			this.$refilCtrl.addEventListener('change', function () {
+				self._params.refil = this.value;
+				self.$refilSlider.value = this.value;
+				self.calculate();
+			});
+		}
+
+		this.$periodSelect.addEventListener('change', function () {
+			self._params.period = this.value
+			self.calculate();
+		});
+
+		this.$switcherPercentCtrl.forEach(function(ctrl) {
+			ctrl.addEventListener('change', function() {
+				self._params.percentType = this.value;
 				self.calculate();
 			});
 		});
+	};
 
-		// this.checkbox.addEventListener('change', function() {
-		// 	if (this.checked) {
-		// 		classie.add(this, '_checked');
-		// 		self._params.stavka += 1;
-		// 	} else {
-		// 		classie.remove(this, '_checked');
-		// 		self._params.stavka -= 1;
-		// 	}
-		// 	self.calculate();
-		// });
+	Calculator.prototype.calculate = function () {
+		this.total = Number(this._params.summa)
+		this.refil = Number(this._params.refil)
 
-		Calculator.prototype.calculate = function () {
-			this.$stavka.innerText = this._params.stavka + '%';
-			this.total = Number(this.summaCtrl.value);
-			// this.total = Number(this.summaCtrl.value) + Number(this.refilCtrl.value*this.month);
-			this.$total.innerText = this.total;
-			// this.dohod = Number(this.refilCtrl.value*this.month);
-			// if (this.checkbox.checked) {
-			// 	this.dohod += this.dohod * 0.01;
-			// }
-			this.$dohod.innerText = this.dohod;
-		};
+		for ( var i = 1; i <= this._params.period; i++ ) {
+			this.total += this.total * (this._params.rate / 12 / 100);
+		}
+
+		this.profit = this.total - Number(this._params.summa);
+		this.profitInMonth = this.profit / this._params.period;
+
+		this._outData();
+	};
+
+	Calculator.prototype._calculate = function () {};
+
+	Calculator.prototype._outData = function () {
+		this.$totalEl.innerText = Math.floor(this.total);
+		this.$profitEl.innerText = Math.floor(this.profit);
+		this.$profitInMonthEl.innerText = Math.floor(this.profitInMonth);
+		this.$rateEl.innerText = this._params.rate + '%';
+		this.$periodEl.innerText = this._params.period
 	};
 
 	window.Calculator = Calculator;

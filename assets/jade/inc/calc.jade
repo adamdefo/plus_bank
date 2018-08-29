@@ -4,13 +4,19 @@
       .calculator__item
         label.calculator__label Сумма
         .calculator__input-box.rubl
-          input.calculator__input(type="text")
+          input.calculator__input.summa(type="text")
         .calculator__rangeslider
-          input#summa(type="range" min="10000" max="999999999")
+          input#summa-slider(type="range" min="10000" max="9999999")
+      //- .calculator__item
+      //-   label.calculator__label Пополнение в месяц
+      //-   .calculator__input-box.rubl
+      //-     input.calculator__input.refil(type="text")
+      //-   .calculator__rangeslider
+      //-     input#refil-slider(type="range" min="10000" max="999999999")
       .calculator__item
         label.calculator__label Срок
         .calculator__input-box.select
-          select#calculator-period.ui-select
+          select#period-select.ui-select
             option(value="1") 1 мес.
             option(value="2") 2 мес.
             option(value="3") 3 мес.
@@ -23,36 +29,45 @@
             option(value="10") 10 мес.
             option(value="11") 11 мес.
             option(value="12") 12 мес.
-        //- .calculator__switcher
-        //-   #switcher-month.switcher
-        //-     .switcher__item
-        //-       input#radio-3.switcher__radio(type="radio" value="3" name="month")
-        //-       label.switcher__label.switcher__label_number(for="radio-3") 3
-        //-     .switcher__item
-        //-       input#radio-6.switcher__radio(type="radio" value="6" name="month")
-        //-       label.switcher__label.switcher__label_number(for="radio-6") 6
-        //-     .switcher__item
-        //-       input#radio-12.switcher__radio(type="radio" value="12" name="month")
-        //-       label.switcher__label.switcher__label_number(for="radio-12") 12
       .calculator__item
         label.calculator__label Выплата процентов
         .calculator__switcher
           #switcher-percent.switcher
             //- .switcher__item.responsive
-            //-   input#radio-add.switcher__radio(type="radio" value="add" name="percent")
-            //-   label.switcher__label.switcher__label_txt(for="radio-add") Добавлять к сумме вклада
+            //-   input#add-to-summa.switcher__radio(type="radio" value="add-to-summa" name="percent")
+            //-   label.switcher__label.switcher__label_txt(for="add-to-summa") Добавлять к сумме вклада
             .switcher__item.responsive
-              input#radio-every.switcher__radio(type="radio" value="every" name="percent")
-              label.switcher__label(for="radio-every") Получать процент ежемесячно
+              input#every-month.switcher__radio(type="radio" value="every-month" name="percent")
+              label.switcher__label(for="every-month") Получать процент ежемесячно
         
   .calculator__result
     .calculator__result-row
       .calculator__result-item
         label Вы получите
-        span#total.rubl 234000
+        span.total.rubl
+      .calculator__result-item.calculator__result-item_report
+        ul.list.list-report
+          li
+            label Общий доход
+            span.profit.rubl
+          li 
+            label Доход в месяц
+            span.profit-in-month.rubl
+          li
+            label Ставка
+            span.rate
+          li
+            label Срок
+            span.period
       .calculator__result-item
-        label Доход
-        span#dohod.rubl 34000
-      .calculator__result-item
-        label Ставка
-        span#stavka._green 17
+        button.btn.btn-orange(type="button")
+          span Посмотреть адреса офисов
+        .links
+          .links__item
+            a.link(href="#")
+              i.icon.icon-search
+              span Полные условия
+          .links__item
+            a.link(href="#")
+              i.icon.icon-search
+              span График начислений

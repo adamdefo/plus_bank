@@ -17,8 +17,7 @@
         position: relative
         display: inline-block
         vertical-align: top
-        margin-right: 40px
-        margin-bottom: 25px
+        margin-right: 80px
         &:last-child
             margin-right: 0
     &__label
@@ -62,8 +61,12 @@
             border: 1px solid rgba(255,255,255,.75)
             cursor: pointer
         &:focus
+            background-color: #ffffff
             border: 1px solid rgba(255,255,255,1)
+            color: #161924
             cursor: text
+            & ~ .calculator__input-box.rubl:after
+                color: #161924
     &__rangeslider
         position: relative
         width: 100%
@@ -78,21 +81,19 @@
             vertical-align: top
             width: 30%
             margin-bottom: 20px
-            & label
-                display: block
-                color: #71737b
-                font-size: 1.4rem
-            & span
-                color: #3d3d3d
-                font-size: 5.4rem
-                &.rubl
-                    &:after
-                        content: '9'
-                        display: inline
-                        font-family: 'PT Rouble Sans'
-                        font-size: 5.4rem
-                        margin-left: 1rem
-                        line-height: 1
+            &_report
+                width: 45%
+            // & span
+            //     color: #3d3d3d
+            //     font-size: 5.4rem
+            //     &.rubl
+            //         &:after
+            //             content: '9'
+            //             display: inline
+            //             font-family: 'PT Rouble Sans'
+            //             font-size: 5.4rem
+            //             margin-left: 1rem
+            //             line-height: 1
     &__links
         position: relative
         width: 100%
@@ -126,40 +127,26 @@
         &:last-child
             margin-right: 0
 
-.label-checkbox
-    position: relative
-    font-size: 1.6rem
-    .checkbox-box
-        position: relative
-        display: inline-block
-        vertical-align: middle
-        width: 26px
-        height: 27px
-        background-color: #ffffff
-        border-radius: 3px
-        box-shadow: 0 2px 2px rgba(0,0,0,.2) inset
-        margin-right: 5px
-        & .checkbox
-            position: absolute
-            opacity: 0
-            z-index: 1
-            &._checked + .check
-                display: block
-        & .check
-            display: none
-            position: absolute
-            top: -10px
-            left: 7px
-            background: url('../img/mark.png') 0 0 no-repeat
-            background-size: cover
-            width: 27px
-            height: 29px
-    & span
-        display: inline-block
-        vertical-align: middle
-    & b
-        font-size: 2.5rem
-        font-weight: 600
+.list
+    &-report
+        & li
+            margin-bottom: 5px
+            &:last-chil
+                margin-bottom: 0
+            &:before
+                content: ''
+            & label
+                display: inline-block
+                vertical-align: middle
+                width: 150px
+            & span
+                display: inline-block
+                vertical-align: middle
+                font-weight: 600
+                margin-left: 5px
+
+
+
 
 @media (max-width: 1280px)
     .calculator__item
