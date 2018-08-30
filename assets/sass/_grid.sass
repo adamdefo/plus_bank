@@ -2,26 +2,39 @@
 	margin: 0 -15px
 
 .col
-	position: relative
 	float: left
+	position: relative
 	padding: 0 15px
 	width: 100%
-.col-2
-	width: calc(100%/6)
-.col-3
-	width: 25%
-.col-4
-	width: 33.33%
-	&:nth-child(2n)
-		width: 33.34%
-.col-6
-	width: 50%
-.col-5
-	width: 20%
+	&-1
+		width: 8.333333%	
+	&-2
+		width: 16.666667%
+	&-3
+		width: 25%
+	&-4
+		width: 33.33%
+		&:nth-child(2n)
+			width: 33.34%
+	&-5
+		width: 41.666667%
+	&-6
+		width: 50%
+	&-7
+		widows: 58.333333%
+	&-8
+		widows: 66.666667%
+	&-9
+		widows: 75%
+	&-10
+		widows: 83.333333%
+	&-11
+		widows: 91.666667%
 
-.clr:before, .clr:after,
-.row:before, .row:after
-	content: ""
-	clear: both
-	display: block
-	line-height: 0
+
+.clr, .row
+	&:before, &:after,
+		content: ''
+		clear: both
+		display: block
+		line-height: 0

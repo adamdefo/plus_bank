@@ -1,8 +1,5 @@
 /**
- * 
  * @author Aleksey Kondratyev
- * @description Кальлятор по расчёту доходов по вкладам
- * 
  */
 ;(function(window) {
 
@@ -17,6 +14,11 @@
 		return a;
 	};
 
+	/**
+	 * Кальлятор по расчёту доходов по вкладам
+	 * @param {*} selector 
+	 * @param {*} params 
+	 */
 	var Calculator = function (selector, params) {
 
 		this._params = extend({}, this._params);
@@ -61,7 +63,7 @@
 	};
 
 	Calculator.prototype._params = {
-		summa: 1000000, // сумма
+		summa: 100000, // сумма
 		refil: 1000, // пополнение
 		percentType: 'every-month', // выплата процентов
 		rate: 8,
@@ -142,11 +144,16 @@
 		this.total = Number(this._params.summa)
 		this.refil = Number(this._params.refil)
 
-		for ( var i = 1; i <= this._params.period; i++ ) {
-			this.total += this.total * (this._params.rate / 12 / 100);
+		if (this._params.percentType === 'every-month') {
+			this.profit = this.total * (this._params.rate / 12 / 100) * this._params.period;
+			this.total += this.profit;
+		} else {
+			for ( var i = 1; i <= this._params.period; i++ ) {
+				this.total += this.total * (this._params.rate / 12 / 100) + this.refil;
+			}
+			this.profit = this.total - this._params.summa;
 		}
 
-		this.profit = this.total - Number(this._params.summa);
 		this.profitInMonth = this.profit / this._params.period;
 
 		this._outData();
