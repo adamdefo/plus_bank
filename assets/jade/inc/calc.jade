@@ -41,11 +41,12 @@
               label.switcher__label(for="every-month") Получать процент ежемесячно
         
   .calculator__result
-    .calculator__result-row
-      .calculator__result-item
+    .calculator__result-row.row
+      .calculator__result-item.calculator__result-item_get.col.col-4
         label Вы получите
         span.total.rubl
-      .calculator__result-item.calculator__result-item_report
+        .calculator__program По программе «Простой»
+      .calculator__result-item.calculator__result-item_report.col.col-4
         ul.list.list-report
           li
             label Общий доход
@@ -59,7 +60,7 @@
           li
             label Срок
             span.period
-      .calculator__result-item
+      .calculator__result-item.col.col-4
         button.btn.btn-orange(type="button")
           span Посмотреть адреса офисов
         .links
