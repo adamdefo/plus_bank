@@ -1,5 +1,7 @@
 $link_hover: #EE741D
+$link_hover_border: rgba(238,116,29,.25)
 $blue: #0C54A0
+$blue_border: rgba(12,84,160,.25)
 $ff: 'Arial', Helvetica, sans-serif
 
 *
@@ -107,3 +109,42 @@ p
 	display: none
 ._show
 	display: block
+
+.file
+	position: relative
+	display: inline-block
+	font-size: 1.9rem
+	padding-left: 24px
+	-webkit-transition: all .25s
+	-moz-transition: all .25s
+	transition: all .25s
+	&__icon
+		position: absolute
+		top: 4px
+		left: -2px
+		display: block
+		width: 22px
+		height: 22px
+		& svg > path
+			fill: $blue
+	& > span
+		border-bottom: 1px solid $blue_border
+		color: #0C54A0
+		padding-bottom: 2px
+	&:hover
+		& > span
+			border-bottom-color: $link_hover_border
+			color: $link_hover
+		& .file__icon svg > path
+			fill: $link_hover
+	&__info
+		color: #777777
+		&-extension
+		&-size
+			margin-left: 7px
+	
+
+
+@media (max-width: 1100px)
+	body
+		overflow: auto

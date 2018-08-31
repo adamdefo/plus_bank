@@ -1,11 +1,81 @@
 .section_faq
-    background: #EFF4F9
-    padding: 40px 0
-    z-index: 50
-    & .content
-        position: relative
-        display: inline-block
-        vertical-align: top
-        z-index: 10
-        &__ttl
-            margin-bottom: 40px
+	background: #EFF4F9
+	padding: 134px 0 146px
+	min-height: 1140px
+	min-width: 1600px
+	margin: 0 auto
+	z-index: 50
+	& .container
+		z-index: 10
+	& .content
+		position: relative
+		display: inline-block
+		vertical-align: top
+		z-index: 10
+		&__ttl
+			margin-bottom: 40px
+		&__list
+			display: inline-block
+			vertical-align: top
+			width: 50%
+	& ._bg
+		position: absolute
+		top: 260px
+		right: 0 
+		width: 1600px
+		height: 800px
+		background: url('../img/girl.jpg') top right no-repeat
+		z-index: 1
+
+
+.faq
+	display: block
+	margin: 0
+	padding: 0
+	&__item
+		display: block
+		font-size: 1.9rem
+		line-height: 2.8rem
+		margin: 0 0 33px
+		padding: 0 0 0 24px
+		&:last-child
+			margin-bottom: 0
+	&__question
+		display: block
+		position: relative
+		color: #0C54A0
+		font-size: 2.4rem
+		line-height: 3.2rem
+		-webkit-transition: all .25s
+		-moz-transition: all .25s
+		transition: all .25s
+		&._active
+			color: #F37521
+			&:before
+				background: url('../img/expand-arr-active.svg') 0 0 no-repeat
+				transform: rotate(90deg)
+			& + .faq__answer
+				opacity: 1
+				height: 100%
+		&:before
+			content: ''
+			display: block
+			background: url('../img/expand-arr.svg') 0 0 no-repeat
+			position: absolute
+			top: 5px
+			left: -24px
+			width: 12px
+			height: 18px
+			-webkit-transition: transform .25s
+			-moz-transition: transform .25s
+			transition: transform .25s
+	&__answer
+		margin-top: 12px
+		height: 0
+		opacity: 0
+		-webkit-transition: height .35s, opacity .25s 
+		-moz-transition: height .35s, opacity .25s 
+		transition: height .35s, opacity .25s
+		& p
+			font-size: 1.9rem
+			line-height: 2.8rem

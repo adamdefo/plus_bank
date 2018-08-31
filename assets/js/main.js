@@ -145,21 +145,26 @@ $(function() {
 		resetForm();
 	});
 
-	// мобильное меню
-	// var $burger = document.querySelector('.burger'),
-	// 	$mobileNav = document.querySelector('.nav-xs');
-	// 	$mobileNavClose = document.querySelector('.js-nav-close');
+	var faqList = document.getElementById('faq-list'),
+		faqItemQuestion = [].slice.call(faqList.querySelectorAll('.faq__question'));
+	
+	faqItemQuestion.forEach(function(item) {
+		item.addEventListener('click', function (ev) {
+			ev.preventDefault();
+			if (classie.has(this, '_active')) {
+				classie.remove(this, '_active')
+			} else {
+				var activeItem = faqItemQuestion.filter(function (item) {
+					return classie.has(item, '_active');
+				})
 
-	// $burger.addEventListener('click', function(event) {
-	// 	classie.add($mobileNav, '_show');
-	// 	classie.add(document.body, '_overflow');
-	// });
-
-	// $mobileNavClose.addEventListener('click', function(event) {
-	// 	classie.remove($mobileNav, '_show');
-	// 	classie.remove(document.body, '_overflow');
-	// });
-
+				if (activeItem.length) {
+					classie.remove(activeItem[0], '_active')
+				}
+				classie.add(this, '_active')
+			}	
+		});
+	});
 });
 
 var yaMap, placeMark;
