@@ -3,25 +3,12 @@
 	width: 100%
 	z-index: 1
 
-.container
-	position: relative
-	margin: 0 auto
-	padding: 0 15px
-	max-width: 1160px
-	width: 1160px
-	&:before, &:after
-		clear: both
-		content: ''
-		display: block
-		height: 0
-
 .main
 	position: relative
 	width: 100%
 
 .bottom
 	margin-top: 4.5rem
-
 
 .b-calculator
 	position: relative
@@ -96,43 +83,6 @@
 			font-size: 1.35rem
 			padding: 24px 0
 
-.master-klass
-	display: table
-	position: relative
-	width: 100%
-	&__item
-		display: table-cell
-		vertical-align: top
-		text-align: left
-		width: 33%
-	&__pic
-		max-width: 265px
-		width: 100%
-		margin-bottom: 3.5rem
-		& img
-			margin: 0 auto
-	&__title
-		position: relative
-		font-size: 1.5rem
-		font-weight: bold
-		margin-bottom: 1.5rem
-		&:before
-			position: absolute
-			top: -18px
-			left: -10px
-			color: rgba(38, 123, 251, .25)
-			content: attr(data-number)
-			speak: none
-			font-size: 5rem
-			font-weight: bold
-			font-variant: normal
-			line-height: 1
-			-webkit-font-smoothing: antialiased
-			-moz-osx-font-smoothing: grayscale
-	&__txt
-		font-size: 1.25rem
-		line-height: 1.35
-
 .section
 	position: relative
 	padding: 2.5rem 0 4.5rem
@@ -160,18 +110,40 @@
 			height: 100%
 			width: 100%
 	&_support
-		padding: 80px 0 90px
+		padding: 78px 0 90px
 
 .support
 	&__item
 		display: inline-block
 		vertical-align: middle
 		& .txt
-			color: #000000
 			font-size: 2.4rem
-			line-height: 1.35
+			line-height: 3.2rem
+		&_phone
+			margin-left: 70px
 	&__phone
-		
+		font-size: 5rem
+		& a
+			&:before
+				content: ''
+				display: inline-block
+				vertical-align: middle
+				background: url('../img/support.png') 0 0 no-repeat
+				background-size: 97px 111px
+				border: 0
+				margin-right: 27px
+				width: 97px
+				height: 111px
+			& span 
+				border-bottom: 1px solid $blue_border
+				color: $blue
+				-webkit-transition: all .25s
+				-moz-transition: all .25s
+				transition: all .25s
+			&:hover
+				& span
+					border-bottom-color: $link_hover_border
+					color: $link_hover
 
 @media (max-width: 980px)
 	.section

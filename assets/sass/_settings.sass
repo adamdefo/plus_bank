@@ -15,7 +15,7 @@ html
 
 body
 	background: #FFFFFF
-	color: #1a1a1a
+	color: #000000
 	font: 400 18px/1.5 $ff
 	margin: 0
 	padding: 0
@@ -23,7 +23,7 @@ body
 
 a
 	border-bottom: 1px solid transparent
-	color: #2e2e2e
+	color: $blue
 	cursor: pointer
 	outline: none
 	text-decoration: none
@@ -115,9 +115,6 @@ p
 	display: inline-block
 	font-size: 1.9rem
 	padding-left: 24px
-	-webkit-transition: all .25s
-	-moz-transition: all .25s
-	transition: all .25s
 	&__icon
 		position: absolute
 		top: 4px
@@ -127,10 +124,16 @@ p
 		height: 22px
 		& svg > path
 			fill: $blue
+			-webkit-transition: all .25s
+			-moz-transition: all .25s
+			transition: all .25s
 	& > span
 		border-bottom: 1px solid $blue_border
 		color: #0C54A0
 		padding-bottom: 2px
+		-webkit-transition: all .25s
+		-moz-transition: all .25s
+		transition: all .25s
 	&:hover
 		& > span
 			border-bottom-color: $link_hover_border
@@ -145,6 +148,6 @@ p
 	
 
 
-@media (max-width: 1100px)
+@media (max-width: 1000px)
 	body
 		overflow: auto

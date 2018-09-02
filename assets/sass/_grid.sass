@@ -1,3 +1,15 @@
+.container
+	position: relative
+	margin: 0 auto
+	padding: 0 15px
+	max-width: 1160px
+	width: 1160px
+	&:before, &:after
+		clear: both
+		content: ''
+		display: block
+		height: 0
+
 .row
 	margin: 0 -15px
 
@@ -30,7 +42,6 @@
 		widows: 83.333333%
 	&-11
 		widows: 91.666667%
-
 
 .clr, .row
 	&:before, &:after,
