@@ -10,17 +10,6 @@
 .bottom
 	margin-top: 4.5rem
 
-.b-calculator
-	position: relative
-	margin-top: -110px
-	width: 100%
-	z-index: 10
-
-@media (max-width: 768px)
-	.b-calculator
-		& > .container
-			padding: 0
-
 .switcher
 	&__item
 		position: relative
@@ -111,6 +100,14 @@
 			width: 100%
 	&_support
 		padding: 78px 0 90px
+	&_calculator
+		margin-top: -110px
+		padding: 0
+
+@media (max-width: 768px)
+	.section_calculator
+		& > .container
+			padding: 0
 
 .support
 	&__item

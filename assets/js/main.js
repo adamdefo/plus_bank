@@ -165,6 +165,39 @@ $(function() {
 			}	
 		});
 	});
+
+
+	var nav = document.querySelector('.nav')
+	var navLinks = [].slice.call(nav.querySelectorAll('.nav__link'));
+	var sectionList = [].slice.call(document.querySelectorAll('.section[data-section]'));
+
+	sectionList.forEach(function (section) {
+		section.dataset.offsetTop = section.offsetTop;
+
+	})
+
+	window.addEventListener( 'scroll', function( event ) {
+		var scrollY = scrollY();
+		sectionList.forEach(function (s) {
+			var sectionOffsetTop = s.dataset.offsetTop;
+			var sectionName = s.dataset.section;
+			if (sectionOffsetTop < scrollY) {
+				resetActiveNavLink();
+			}
+		})
+	}, false );
+
+	var scrollY = function () {
+		return window.pageYOffset || docElem.scrollTop;
+	}
+
+	
+	var resetActiveNavLink = function () {
+		navLinks.forEach(function (link) {
+			classie.remove(link, '_active')
+		});
+	}
+
 });
 
 var yaMap, placeMark;
