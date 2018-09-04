@@ -167,36 +167,78 @@ $(function() {
 	});
 
 
-	var nav = document.querySelector('.nav')
-	var navLinks = [].slice.call(nav.querySelectorAll('.nav__link'));
-	var sectionList = [].slice.call(document.querySelectorAll('.section[data-section]'));
+	// var nav = document.querySelector('.nav')
+	// var navLinks = [].slice.call(nav.querySelectorAll('.nav__link'));
+	// var sectionList = [].slice.call(document.querySelectorAll('.section[data-section]'));
 
-	sectionList.forEach(function (section) {
-		section.dataset.offsetTop = section.offsetTop;
+	// navLinks.forEach(function(link) {
+	// 	// link.dataset.offsetTop = section.offsetTop;
+	// 	link.addEventListener('click', function (ev) {
+	// 		ev.preventDefault();
+	// 		console.log(this.dataset.scrollto);
+	// 	});
+	// });
 
-	})
+	// sectionList.forEach(function (section) {
+	// 	section.dataset.offsetTop = section.offsetTop;
+	// })
 
-	window.addEventListener( 'scroll', function( event ) {
-		var scrollY = scrollY();
-		sectionList.forEach(function (s) {
-			var sectionOffsetTop = s.dataset.offsetTop;
-			var sectionName = s.dataset.section;
-			if (sectionOffsetTop < scrollY) {
-				resetActiveNavLink();
-			}
-		})
-	}, false );
-
-	var scrollY = function () {
+	var docElem = document.documentElement
+	function scrollY() {
 		return window.pageYOffset || docElem.scrollTop;
 	}
 
-	
-	var resetActiveNavLink = function () {
-		navLinks.forEach(function (link) {
-			classie.remove(link, '_active')
+	var headerHeight = $('.js-header').height(),
+		$nav = $('.js-nav'),
+		$navLinks = $nav.find('.nav__link'),
+		$scrollItems = $navLinks.map(function () {
+			var item = $($(this).attr('href'));
+			if (item.length) {
+				return item;
+			}
 		});
-	}
+
+	window.addEventListener( 'scroll', function( event ) {
+		var scrollTop = $(this).scrollTop(),
+			fromTop = scrollTop + $nav.outerHeight() + headerHeight,
+			cur = $scrollItems.map(function () {
+				if ($(this).offset().top < (fromTop + 100))
+					return this;
+			});
+
+		cur = cur[cur.length - 1];
+		var id = (cur && cur.length) ? cur.prop('id') : '';
+
+		$navLinks.removeClass('_active').filter("[href='#" + id + "']").addClass('_active');
+	}, false );
+
+	
+	$navLinks.on('click', function (e) {
+		e.preventDefault();
+		var target = $(this).attr('href'),
+			offset,
+			delta;
+
+		if (!target.length)
+			return false;
+		delta = ($(this).data('delta-offset')) ? parseInt($(this).data('delta-offset')) : 0;
+		offset = $(target).offset().top - headerHeight + delta;
+
+		if (target == '#calculator') {
+			offset -= 100;
+		}
+
+		$('html, body').animate({scrollTop: offset}, 750);
+	});
+
+	
+
+	
+	// var resetActiveNavLink = function (scrollTop) {
+	// 	navLinks.forEach(function (link) {
+	// 		classie.remove(link, '_active')
+	// 	});
+	// }
 
 });
 

@@ -4,21 +4,21 @@ header.header.js-header
 			a.logo(href="/")
 				img(src="img/logo.png")
 		.header__nav
-			nav.nav
+			nav.nav.js-nav
 				.nav__item
-					a.nav__link._active(href="#calculator")
+					a.nav__link._active(href="#calculator" data-scrollto="calculator")
 						span Калькулятор
 				.nav__item
-					a.nav__link(href="#programs")
+					a.nav__link(href="#protect" data-scrollto="programs")
 						span Страхование
 				.nav__item
-					a.nav__link(href="#faq")
+					a.nav__link(href="#faq" data-scrollto="faq")
 						span Вопросы
 				.nav__item
-					a.nav__link(href="#about")
+					a.nav__link(href="#about" data-scrollto="about")
 						span О компании
 				.nav__item
-					a.nav__link(href="#contacts")
+					a.nav__link(href="#contacts" data-scrollto="contacts")
 						span Контакты
 		.header__right
 			a.header__phone(href="tel:+8422425071")
@@ -26,23 +26,23 @@ header.header.js-header
 			//- a.header__callback.js-show-callback(data-modal="callback")
 			//- 	span Обратный звонок
 
-nav.nav.nav-xs
-	.nav-xs__container
-		button.nav-xs__close.js-nav-close(type="button") Закрыть
-		.nav-xs__box
-			ul.nav__list.nav-xs__list
-				li.nav-xs__item
-					a.nav-xs__link
-						span Калькулятор
-				li.nav-xs__item
-					a.nav-xs__link
-						span Программы
-				li.nav-xs__item
-					a.nav-xs__link
-						span О компании
-				li.nav-xs__item
-					a.nav-xs__link
-						span Ответы и вопросы
-				li.nav-xs__item
-					a.nav-xs__link
-						span Контакты
+//- nav.nav.nav-xs
+//- 	.nav-xs__container
+//- 		button.nav-xs__close.js-nav-close(type="button") Закрыть
+//- 		.nav-xs__box
+//- 			ul.nav__list.nav-xs__list
+//- 				li.nav-xs__item
+//- 					a.nav-xs__link
+//- 						span Калькулятор
+//- 				li.nav-xs__item
+//- 					a.nav-xs__link
+//- 						span Программы
+//- 				li.nav-xs__item
+//- 					a.nav-xs__link
+//- 						span О компании
+//- 				li.nav-xs__item
+//- 					a.nav-xs__link
+//- 						span Ответы и вопросы
+//- 				li.nav-xs__item
+//- 					a.nav-xs__link
+//- 						span Контакты
