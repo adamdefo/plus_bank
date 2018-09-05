@@ -145,6 +145,8 @@ $(function() {
 		resetForm();
 	});
 
+
+	// FAQ
 	var faqList = document.getElementById('faq-list'),
 		faqItemQuestion = [].slice.call(faqList.querySelectorAll('.faq__question'));
 	
@@ -167,27 +169,7 @@ $(function() {
 	});
 
 
-	// var nav = document.querySelector('.nav')
-	// var navLinks = [].slice.call(nav.querySelectorAll('.nav__link'));
-	// var sectionList = [].slice.call(document.querySelectorAll('.section[data-section]'));
-
-	// navLinks.forEach(function(link) {
-	// 	// link.dataset.offsetTop = section.offsetTop;
-	// 	link.addEventListener('click', function (ev) {
-	// 		ev.preventDefault();
-	// 		console.log(this.dataset.scrollto);
-	// 	});
-	// });
-
-	// sectionList.forEach(function (section) {
-	// 	section.dataset.offsetTop = section.offsetTop;
-	// })
-
-	var docElem = document.documentElement
-	function scrollY() {
-		return window.pageYOffset || docElem.scrollTop;
-	}
-
+	// HEADER
 	var headerHeight = $('.js-header').height(),
 		$nav = $('.js-nav'),
 		$navLinks = $nav.find('.nav__link'),
@@ -197,7 +179,8 @@ $(function() {
 				return item;
 			}
 		});
-
+	
+	// скролинг страницы и установка активного пункта навигации
 	window.addEventListener( 'scroll', function( event ) {
 		var scrollTop = $(this).scrollTop(),
 			fromTop = scrollTop + $nav.outerHeight() + headerHeight,
@@ -212,7 +195,7 @@ $(function() {
 		$navLinks.removeClass('_active').filter("[href='#" + id + "']").addClass('_active');
 	}, false );
 
-	
+	// SCROLL TO SECTION
 	$navLinks.on('click', function (e) {
 		e.preventDefault();
 		var target = $(this).attr('href'),
@@ -230,17 +213,26 @@ $(function() {
 
 		$('html, body').animate({scrollTop: offset}, 750);
 	});
-
-	
-
-	
-	// var resetActiveNavLink = function (scrollTop) {
-	// 	navLinks.forEach(function (link) {
-	// 		classie.remove(link, '_active')
-	// 	});
-	// }
-
 });
+
+
+var markList = [
+	{
+		x: 55.74176025772402,
+		y: 37.622793340908366
+	},
+	{
+		x: 55.742488165033336,
+		y: 37.62456411299468
+	
+	},
+	{
+		x: 55.739486107320026,
+		y: 37.624328078601366
+	}
+]
+
+var yaMapCenter = [55.74136242056952,37.623555602405084]
 
 var yaMap, placeMark;
 ymaps.ready(initMap);

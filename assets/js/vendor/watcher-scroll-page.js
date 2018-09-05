@@ -10,7 +10,7 @@
 			window.addEventListener( 'scroll', function( event ) {
 				if( !didScroll ) {
 					didScroll = true;
-					setTimeout( scrollPage, 250 );
+					setTimeout( scrollPage, 300 );
 				}
 			}, false );
 		}
@@ -18,10 +18,10 @@
 		function scrollPage() {
 			var sy = scrollY();
 			if ( sy >= changeHeaderOn ) {
-				classie.add( header, 'header--fixed' );
+				classie.add( header, 'header-scroll' );
 			}
 			else {
-				classie.remove( header, 'header--fixed' );
+				classie.remove( header, 'header-scroll' );
 			}
 			didScroll = false;
 		}

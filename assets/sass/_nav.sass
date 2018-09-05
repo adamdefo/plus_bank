@@ -10,16 +10,17 @@
 		position: relative
 		display: inline-block
 		vertical-align: top
-		font-size: 1.8rem
-		line-height: 1.75
-		margin-right: 26px
+		font-size: 1.9rem
+		line-height: 6rem
+		margin-right: 20px
 		&:last-child
 			margin-right: 0
 	&__link
+		display: block
 		color: #ffffff
-		padding-bottom: .1rem
+		// padding-bottom: .1rem
 		&:hover
-			border-bottom: 1px solid $link_hover
+			// border-bottom: 1px solid $link_hover
 			color: $link_hover
 		&._active
 			border: 0
@@ -78,6 +79,33 @@
 			cursor: pointer
 			z-index: 1000
 
+.header
+	&-scroll 
+		position: fixed
+		top: 0
+		background-color: #ffffff
+		& .header__logo
+			& .white
+				display: none
+			& .colorful
+				display: inline-block
+		& .nav
+			&__link
+				display: block
+				border-bottom: 2px solid #ffffff 
+				color: $blue
+				&:hover
+					border-bottom-color: #ffffff
+					color: $link_hover
+				&._active
+					border-bottom: 2px solid $link_hover
+					color: $link_hover
+		& .header__phone
+			background: #F2F8FD
+			color: $blue
+			&:hover
+				color: $link_hover
+
 .burger
 	display: none
 	position: absolute
@@ -91,8 +119,8 @@
 
 @media (max-width: 1600px)
 	.nav__item
-		font-size: 1.8rem
-		margin-right: 3rem
+		// font-size: 1.8rem
+		// margin-right: 3rem
 @media (max-width: 980px)
 	.burger
 		display: block

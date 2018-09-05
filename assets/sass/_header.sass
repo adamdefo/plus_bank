@@ -1,12 +1,12 @@
 .header
-	position: fixed
+	position: absolute
+	top: 5px
+	left: 0
 	width: 100%
 	z-index: 100
-	webkit-transition: background .25s
-	-moz-transition: background .25s
-	transition: background .25s
-	&--fixed
-		background: $blue
+	-webkit-transition: background-color .25s, top .25s
+	-moz-transition: background-color .25s, top .25s
+	transition: background-color .25s, top .25s
 	& a
 		-webkit-transition: all .25s
 		-moz-transition: all .25s
@@ -14,13 +14,20 @@
 	&__container
 		position: relative
 		margin: 0 auto
-		padding: 20px 15px 15px
+		padding: 0 15px
 		max-width: 1160px
 		width: 100%
+		-webkit-transition: padding .25s
+		-moz-transition: padding .25s
+		transition: padding .25s
 	&__logo
 		display: inline-block
 		vertical-align: middle
-		margin-right: 115px
+		margin-right: 88px
+		& .white
+			display: inline-block
+		& .colorful
+			display: none
 	&__caption
 		display: block
 		font-size: 3rem
@@ -41,7 +48,7 @@
 		border-radius: 5px
 		display: block
 		color: #ffffff
-		font-size: 1.8rem
+		font-size: 1.9rem
 		line-height: 1
 		padding: 11px 7px
 		&-xs
@@ -70,9 +77,5 @@
 
 @media (max-width: 1130px)
 	.header
-		&__container
-		&__nav
 @media (max-width: 580px)
 	.header
-		&__phone-xs
-			display: none
