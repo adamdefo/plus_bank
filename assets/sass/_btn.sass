@@ -36,12 +36,16 @@ button
 		-moz-transition: all .25s
 		transition: all .25s
 	&:hover:after
-		box-shadow: none
+		bottom: 5px
+	&:active
+		&:before
+			background: #DF6A1C
+			box-shadow: inset 0px 2px 10px #AD5419
+		&:after
+			box-shadow: none
 	&:disabled
 		background: #cccccc
 		cursor: default
-	
-	
 
 .btn-promo
 	position: relative

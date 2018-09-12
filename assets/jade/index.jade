@@ -41,3 +41,68 @@ html
 								strong
 							.answer-form__btn
 								button.btn(type="button") Хорошо
+
+		//- модалка с расчётом начислений
+		.md.md-calculator.js-md_calculator-program
+			.md__overlay
+			.md__container
+				.md__inner
+					.md-close.js-md-close Закрыть
+					.md__header
+						.title График начислений<br> по программе 
+							span.js-program-name
+					.md__content
+						.information.row
+							.information__item.col.col-6
+								label.information__item-label Сумма сбережения
+								span.js-summa.rubl
+							.information__item.col.col-6
+								label.information__item-label Срок сбережения
+								span.js-srok
+							.information__item.col.col-6
+								label.information__item-label Доход по программе
+								span.js-dohod.rubl
+							.information__item.col.col-6
+								label.information__item-label Выплата процентов
+								span.js-percent-type
+							.information__item.col.col-6
+								label.information__item-label Процентная ставка
+								span.js-stavka
+						table.tbl.tbl-report.js-calculator-tbl
+							thead
+								tr
+									th.th_number Номер<br>месяца
+									th.th_summa Сумма<br>сбережений
+									th.th_refit Сумма<br>пополнений
+									th Сумма<br>начисленных %
+							tbody
+					.md__footer
+						table.tbl
+							tr
+								td.col-6.md__footer-itogo Итого: за 
+									span.js-srok
+									span <br>вы получите 
+									span.js-total-itogo.rubl
+								td.col-6.right
+									button.btn.js-print-save(type="button")
+										span Сохранить или распечатать
+						.md__footer-note График показывает динамику начислений по сбережению и носит информационный характер
+
+		//- модалка с полными условиями
+		.md.md-usloviya.js-md_usloviya
+			.md__overlay
+			.md__container
+				.md__inner
+					.md-close.js-md-close Закрыть
+					.md__header
+						.title Полные условия программ
+					.md__content
+						.tabs.js-tabs
+							ul.tabs__switcher
+								li.tabs__switcher-item Сезонный плюс
+								li.tabs__switcher-item Годовой плюс
+								li.tabs__switcher-item Стабильный плюс
+							.tabs__switcher-content
+								.tabs__item Сезонный плюс
+								.tabs__item Годовой плюс
+								.tabs__item Стабильный плюс

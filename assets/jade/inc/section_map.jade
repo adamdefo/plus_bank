@@ -7,13 +7,16 @@ section#contacts.section.section_map(data-section="contacts")
 			.map__content
 				.map__content-row
 					.map__switcher
-						button.map__switcher-item Горьковский
-						button.map__switcher-item Московские ворота
-						button.map__switcher-item Новочеркасский
+						button.map__switcher-item.js-map-switch(data-coords="55.74818547347099,37.6238328451877") Горьковский
+						button.map__switcher-item.js-map-switch(data-coords="55.75729498607369,37.61409483032777") Московские ворота
+						button.map__switcher-item.js-map-switch(data-coords="55.75815692454939,37.63876738498264") Новочеркасский
 				.map__content-row
-					p ул. Малая Посадская, дом 4а, лит. А, пом. 1-H Пн – Пт: 9:00 – 19:00, без перерыва. Сб, Вс: выходной
-					a(href="tel:88234253797")
-						span 8 823 425-37-97
+					.map__switcher-content
+						p ул. Малая Посадская, дом 4а, лит. А, пом. 1-H Пн – Пт: 9:00 – 19:00, без перерыва. Сб, Вс: выходной
+					.map__switcher-content
+						p ул. Московские ворота
+					.map__switcher-content
+						p ул. Новочеркасский
 				.map__content-row
-					button.btn.btn-orange
+					button.btn
 						span Сохранить схему проезда

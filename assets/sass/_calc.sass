@@ -4,9 +4,10 @@
         background: radial-gradient(1073.93px at -37.15% -104.17%, #14213D 0%, #0C54A0 100%), #0C54A0
         box-shadow: 0px 8px 40px rgba(5, 51, 99, 0.3)
         border-radius: 10px
-        padding: 40px 20px
+        padding: 40px 100px
         text-align: center
         width: 100%
+        z-index: 10
     &__row
         position: relative
         width: 100%
@@ -30,7 +31,7 @@
     &__input-box
         position: relative
         width: 100%
-        max-width: 202px
+        max-width: 256px
         &.select
             width: 176px
         &.rubl:after
@@ -54,7 +55,7 @@
         padding: 9px 30px 10px 15px
         width: 100%
         outline: none
-        webkit-transition: border-color .25s
+        -webkit-transition: border-color .25s
         -moz-transition: border-color .25s
         transition: border-color .25s
         &:hover
@@ -72,14 +73,23 @@
         width: 100%
         max-width: 202px
     &__result
-        background: #F2F8FD
-        border-radius: 10px
-        margin-top: -15px
-        padding: 55px 30px 30px
+        position: relative
+        margin-top: -10px
+        z-index: 1
+        & .row
+            margin: 0 -10px
+        & .col
+            padding: 0 10px
         &-item
-            display: inline-block
-            vertical-align: top
-            margin-bottom: 20px
+            border-radius: 10px
+            padding: 48px 30px 38px
+            & .btn
+                display: none
+                width: 100%
+            &._active
+                background: #F2F8FD
+                & .btn
+                    display: block
             &_get
                 font-size: 3rem
                 font-weight: 600
@@ -91,21 +101,30 @@
         font-weight: 400
         margin-top: 15px
 
+.result
+    &__name
+        color: #000000
+        font-size: 3.1rem
+        font-weight: 600
+        margin-bottom: 10px
+    &__footer
+        & .links
+            margin: 34px 0
+        
+
 .links
     position: relative
     width: 100%
-    margin-top: 20px
     &__item
-        display: inline-block
-        vertical-align: middle
-        margin-right: 15px
         margin-bottom: 15px
     &:last-child
-        margin-right: 0
+        margin-bottom: 0
 
 .list
     &-report
         & li
+            font-size: 1.9rem
+            line-height: 3.2rem
             margin-bottom: 5px
             &:last-child
                 margin-bottom: 0
@@ -126,11 +145,11 @@
 
 @media (max-width: 1280px)
     .calculator__item
-        margin-right: 40px
+        // margin-right: 40px
 @media (max-width: 920px)
     .calculator
         &__result
-            padding: 25px 20px
+            // padding: 25px 20px
             &-item
                 display: block
                 width: 100%
