@@ -14,6 +14,8 @@ var validateEmail = function(email) {
 }
 
 $(function() {
+	var tabs = new Tabs('.js-tabs'); // табы с описанием программ
+	var phone = '88124253797';
 	// HEADER
 	var headerHeight = $('.js-header').height(),
 		$nav = $('.js-nav'),
@@ -59,8 +61,13 @@ $(function() {
 		$('html, body').animate({scrollTop: offset}, 750);
 	});
 
+	// инициализация калькулятора и наблюдателя за скролом
 	var watcherSP = new WatcherScrollPage();
 	var calcApp = new Calculator('#calculator');
+
+	// кнопки Распечатать, Сохранить схему проезда
+	var btnSaveScheme = $('.js-save-scheme');
+
 	// ползунок "сумма"
 	var $summaSlider = $('#summa-slider');
 	$summaSlider.rangeslider({
@@ -68,13 +75,20 @@ $(function() {
 		onSlide: function(position, value) {
 			calcApp.updateInputValue(calcApp.$summaCtrl, value, 'summa');
 			calcApp.calculate();
+			btnSaveScheme.attr('href', calcApp.generatePdfHref(calcApp.selectedTariff, phone, activePlacemark))
+			tabs.setActiveTab(calcApp.selectedTariff.id);
+			calcInputSumma.set(value);
+			totalSumma.set(calcApp.selectedTariff.total);
 		},
 		onSlideEnd: function(position, value) {}
 	});
 	var $summaInput = $('.summa');
 	$summaInput.on('change', function () {
 		$summaSlider.val(this.value).change();
+		btnSaveScheme.attr('href', calcApp.generatePdfHref(calcApp.selectedTariff, phone, activePlacemark))
+		tabs.setActiveTab(calcApp.selectedTariff.id);
 	});
+
 	// ползунок "пополнение в месяц"
 	var $refilSlider = $('#refil-slider');
 	$refilSlider.rangeslider({
@@ -82,130 +96,43 @@ $(function() {
 		onSlide: function(position, value) {
 			calcApp.updateInputValue(calculator.$refilCtrl, value, 'refil');
 			calcApp.calculate();
+			btnSaveScheme.attr('href', calcApp.generatePdfHref(calcApp.selectedTariff, $('.header__phone > span').text()))
 		},
 		onSlideEnd: function(position, value) {}
+	});
+
+	// селект со Сроком вклада
+	var $calculatorSelect = $('.js-calculator-period');
+	$calculatorSelect.on('change', function () {
+		btnSaveScheme.attr('href', calcApp.generatePdfHref(calcApp.selectedTariff, phone, activePlacemark));
+		tabs.setActiveTab(calcApp.selectedTariff.id);
+		totalSumma.set(calcApp.selectedTariff.total);
 	});
 
 	// маска номера телефона
 	$('.js-phone').mask('+7 (999) 999-9999');
 
-	// var $answerForm = document.querySelector('.answer-form'),
-	// 	$answerFormPhone = $answerForm.querySelector('.answer-form__phone > strong'),
-	// 	$answerFormBtn = $answerForm.querySelector('.answer-form__btn > button');
-
-	// // заявка на обратный звонок
-	// var $callbackForm = document.querySelector('.js-form-callback'), // форма
-	// 	$clientName = $callbackForm.querySelector('input[name=name]'), // инпут Имя
-	// 	$clientPhone = $callbackForm.querySelector('input[name=phone]'), // инпут Номер телефона
-	// 	$clientIsAgree = $callbackForm.querySelector('input[name=isAgree]'), // чекбокс
-	// 	$sendCallback = $callbackForm.querySelector('.js-send-callback'); // кнопка Перезвоните
-
-	// var validateCallbackForm = function() {
-	// 	if (validateInput($clientName) && validateInput($clientPhone) && $clientIsAgree.checked) {
-	// 		$sendCallback.disabled = false;
-	// 	} else {
-	// 		$sendCallback.disabled = true;
-	// 	}
-	// }
-
-	// $clientName.addEventListener('blur', function() {
-	// 	validateCallbackForm();
-	// });
-
-	// $clientPhone.addEventListener('blur', function() {
-	// 	validateCallbackForm();
-	// });
-
-	// $clientIsAgree.addEventListener('change', function() {
-	// 	validateCallbackForm();
-	// });
-
-	// var resetForm = function() {
-	// 	setTimeout(function () {
-	// 		classie.remove($callbackForm, '_hide');
-	// 		classie.remove($answerForm, '_show');
-	// 		$('.md__header > .title').text('Заявка на обратный звонок');
-	// 		$clientName.value = '';
-	// 		$clientPhone.value = '';
-	// 		$clientIsAgree.checked = false;	
-	// 		$sendCallback.disabled = true;
-	// 	}, 300);
-	// }
-
-	// $sendCallback.addEventListener('click', function(ev) {
-	// 	ev.preventDefault();
-	// 	var error = 0;
-	
-	// 	var name = $clientName.value;
-	// 	if (!name) {
-	// 		classie.add($clientName, '_error');
-	// 		error++;
-	// 	};
-	
-	// 	var phone = $clientPhone.value;
-	// 	if (!phone) {
-	// 		classie.add($clientPhone, '_error');
-	// 		error++;
-	// 	};
-	
-	// 	if(!error) {
-	// 		$.ajax({
-	// 			async: true,
-	// 			type: "POST",
-	// 			url: "/ajax/callback.php",
-	// 			dataType: "json",
-	// 			data: {name: name, phone: phone},
-	// 			success: function(data) {
-	// 				$('.md__header > .title').text('Спасибо');
-	// 				classie.add($callbackForm, '_hide');
-	// 				classie.add($answerForm, '_show');
-	// 				$answerFormPhone.innerText = phone;
-	// 			},
-	// 			error: function(data) {
-	// 				console.log(data)
-	// 			}
-	// 		});
-	// 	};
-
-	// 	return false;
-	// });
-
-	// $('.js-show-callback').on('click', function() {
-	// 	$('.md').addClass('_show');
-	// });
-
-	// закрывает модалку с формой обратного звонка
-	// $answerFormBtn.addEventListener('click', function() {
-	// 	$('.md-callback').removeClass('_show');
-	// 	resetForm();
-	// });
-
-	// табы
-	var $tabs = $('.js-tabs'),
-		$tabsSwitcher = $tabs.find('.tabs__switcher'),
-		$tabsSwitcherItem = $tabsSwitcher.find('.tabs__switcher-item'),
-		$tabsContent = $tabs.find('.tabs__item');
-	
-	$tabsSwitcherItem.on('click', function() {
-		$tabsSwitcherItem.removeClass('_active');
-		$(this).addClass('_active');
-		$tabsContent.removeClass('_active');
-		$($tabsContent[$(this).index()]).addClass('_active');
-	});
-	
 	var print = $('.js-print-save');
 	print.on('click', function () {
-		window.print();
+		var header = $calcProgramModal.find('.md__header').html();
+		var content = $calcProgramModal.find('.md__content').html();
+		var footer = $calcProgramModal.find('.md__footer .md__footer-itogo').html();
+		var html = header + content + footer;
+
+		var win = window.open('','','left=0,top=0,width=600,height=800,toolbar=0,scrollbars=1,status=0');
+		win.document.write(html);
+		win.focus();
+		win.print();
+		win.close();
 	});
 
 	// МОДАЛКИ ДЛЯ КАЛЬКУЛЯТОРА
 	var $calcProgramModal = $('.js-md_calculator-program'); // модалка с расчетом
 	$('.js-show-calculator-modal').on('click', function() {
-		var tariff = calcApp.tariffs[$(this).index()];
-		var tariffName = this.dataset.tariff;
+		var tariff = calcApp.selectedTariff;
 		$('body').addClass('_overflow');
 		$calcProgramModal.addClass('_show');
-		$calcProgramModal.find('.js-program-name').text(tariffName); // название тарифа
+		$calcProgramModal.find('.js-program-name').text(tariff.name); // название тарифа
 		$calcProgramModal.find('.js-summa').text(calcApp._params.summa); // сумма сбережения
 		$calcProgramModal.find('.js-srok').text(calcApp._params.period + ' мес.'); // срок сбережения
 		$calcProgramModal.find('.js-dohod').text(Math.floor(tariff.profit)); // доход по программе
@@ -223,18 +150,22 @@ $(function() {
 		$calcUsloviyaModal.addClass('_show');
 	});
 
+	var $calcMapModal = $('.js-md_map'); // модалка с картой
+	$('.js-look-adress').on('click', function() {
+		$('body').addClass('_overflow');
+		$calcMapModal.addClass('_show');
+	});
+
 	// закрытие модалки при нажатие на overlay
 	$('.js-md-close').on('click', function() {
 		$('body').removeClass('_overflow');
 		$(this).parent().parent().parent().removeClass('_show');
-		// resetForm();
 	});
 
 	// закрытие модалки при нажатие на крестик
 	$('.md__overlay').on('click', function() {
 		$('body').removeClass('_overflow');
 		$(this).parent().removeClass('_show');
-		// resetForm();
 	});
 
 
@@ -260,42 +191,51 @@ $(function() {
 		});
 	});
 
-
 	// ПЕРЕКЛЮЧАТЕЛЬ ОФИСОВ НА КАРТЕ
-	var $mapSwitcherList = [].slice.call(document.querySelectorAll('.js-map-switch'));
+	var activePlacemark = '';
+	var pathToPlaceMarkIcon = './img/';
+	var $mapSwitcherList = [].slice.call(document.querySelectorAll('.js-map-switch')),
+		$mapSwitcher = $('.js-map-switch'),
 		$mapSwitcherContent = $('.map__switcher-content');
+	var activeMapSwitcher = 0;
 
-	classie.add($mapSwitcherList[0], '_active')
-	$($mapSwitcherContent[0]).addClass('_active');
-	$mapSwitcherList.forEach(function (el, index) {
-		el.addEventListener('click', function (ev) {
-			ev.preventDefault();
-			var activeItem = $mapSwitcherList.filter(function (item) {
-				return classie.has(item, '_active');
-			})
+	$($mapSwitcher[activeMapSwitcher]).addClass('_active');
+	$($mapSwitcherContent[activeMapSwitcher]).addClass('_active');
+	$mapSwitcher.on('click', function (ev) {
+		ev.preventDefault();
+		activeMapSwitcher = $(this).index();
+		$mapSwitcher.removeClass('_active');
+		$(this).addClass('_active');
+		$mapSwitcherContent.removeClass('_active');
+		$($mapSwitcherContent[activeMapSwitcher]).addClass('_active');
 
-			if (activeItem.length) {
-				classie.remove(activeItem[0], '_active')
-			}
-			classie.add(this, '_active')
+		$tabsMapSwitcherItem.removeClass('_active');
+		$tabsMapContent.removeClass('_active');
+		$($tabsMapSwitcherItem[activeMapSwitcher]).addClass('_active');
+		$($tabsMapContent[activeMapSwitcher]).addClass('_active');
 
-			$mapSwitcherContent.removeClass('_active');
-			$($mapSwitcherContent[index]).addClass('_active');
-			// сбрасываю выделение с меток на карте
-			resetActivePlacemark($mapSwitcherList.length);
-			// выделяю метку
-			yaMap.geoObjects.get(index).options.set('iconImageHref', '../img/metka_active.png');
-			// смещаю карту на центр
-			var mapCenter = this.dataset.coords.split(',');
-			yaMap.setCenter([mapCenter[0],mapCenter[1]]);
-		});
+		setActivePlacemark(yaMap, $mapSwitcherList.length, this.dataset.coords);
+		setActivePlacemark(yaMapModal, $mapSwitcherList.length, this.dataset.coords);
+		btnSaveScheme.attr('href', calcApp.generatePdfHref(calcApp.selectedTariff, phone, activePlacemark));
 	});
 
+
 	// сбрасывает выделения у меток на карте
-	var resetActivePlacemark = function (count) {
+	var resetActivePlacemark = function (map, count) {
 		for (var i = 0; i < count; i++) {
-			yaMap.geoObjects.get(i).options.set('iconImageHref', '../img/metka.png');;
+			map.geoObjects.get(i).options.set('iconImageHref', pathToPlaceMarkIcon + 'metka.png');;
 		}
+	}
+
+	var setActivePlacemark = function (map, count, coords) {
+		resetActivePlacemark(map, count);
+		// выделяю метку
+		var placemark = map.geoObjects.get(activeMapSwitcher);
+		placemark.options.set('iconImageHref', pathToPlaceMarkIcon + 'metka_active.png');
+		// смещаю карту на центр
+		activePlacemark = coords;
+		var mapCenter = coords.split(',');
+		map.setCenter([mapCenter[0],mapCenter[1]]);
 	}
 
 	// центр карты
@@ -319,15 +259,84 @@ $(function() {
 				},
 				{
 					iconLayout: 'default#image',
-					iconImageHref: '../img/metka.png',
+					iconImageHref: pathToPlaceMarkIcon + 'metka.png',
 					iconImageSize: [46, 63],
 					iconImageOffset: [-20, -54]
 				}
 			);
 			yaMap.geoObjects.add(placeMark);
 		});
+		activePlacemark = $mapSwitcherList[0].dataset.coords;
+		btnSaveScheme.attr('href', calcApp.generatePdfHref(calcApp.selectedTariff, phone, activePlacemark));
 		// делаю первую метку активной
-		yaMap.geoObjects.get(0).options.set('iconImageHref', '../img/metka_active.png');
+		yaMap.geoObjects.get(0).options.set('iconImageHref', pathToPlaceMarkIcon + 'metka_active.png');
 		yaMap.behaviors.disable('scrollZoom');
 	}
+
+	// карта яндекс в модалке
+	var yaMapModal;
+	ymaps.ready(initMapModal);
+	function initMapModal() { 
+		yaMapModal = new ymaps.Map('map-modal', {
+			center: yaMapCenter,
+			zoom: 13,
+			controls: ['zoomControl']
+		});
+		$mapSwitcherList.forEach(function (mark, index) {
+			var placeMark = new ymaps.Placemark(
+				mark.dataset.coords.split(','),
+				{
+					hideIcon: false,
+					hintContent: 'Подсказка' + index
+					// balloonContent: 'Содержимое метки' + index
+				},
+				{
+					iconLayout: 'default#image',
+					iconImageHref: pathToPlaceMarkIcon + 'metka.png',
+					iconImageSize: [46, 63],
+					iconImageOffset: [-20, -54]
+				}
+			);
+			yaMapModal.geoObjects.add(placeMark);
+		});
+		// делаю первую метку активной
+		yaMapModal.geoObjects.get(0).options.set('iconImageHref', pathToPlaceMarkIcon + 'metka_active.png');
+		yaMapModal.behaviors.disable('scrollZoom');
+	}
+
+	// табы в модалке с картой
+	var $tabsMap = $('.js-tabs-map'),
+		$tabsMapSwitcherItem = $tabsMap.find('.tabs__switcher-item'),
+		$tabsMapContent = $tabsMap.find('.tabs__item');
+	
+	$($tabsMapSwitcherItem[activeMapSwitcher]).addClass('_active');
+	$($tabsMapContent[activeMapSwitcher]).addClass('_active');
+	$tabsMapSwitcherItem.on('click', function(ev) {
+		ev.preventDefault();
+		activeMapSwitcher = $(this).index();
+		$tabsMapSwitcherItem.removeClass('_active');
+		$(this).addClass('_active');
+		$tabsMapContent.removeClass('_active');
+		$($tabsMapContent[activeMapSwitcher]).addClass('_active');
+
+		$mapSwitcher.removeClass('_active');
+		$mapSwitcherContent.removeClass('_active');
+		$($mapSwitcher[activeMapSwitcher]).addClass('_active');
+		$($mapSwitcherContent[activeMapSwitcher]).addClass('_active');
+
+		setActivePlacemark(yaMap, $mapSwitcherList.length, this.dataset.coords);
+		setActivePlacemark(yaMapModal, $mapSwitcherList.length, this.dataset.coords);
+		btnSaveScheme.attr('href', calcApp.generatePdfHref(calcApp.selectedTariff, phone, activePlacemark));
+	});
+
+
+	var calcInputSumma = new AutoNumeric('.js-calc-input-summa',
+	{
+		selectNumberOnly: true,
+		decimalPlaces : 0,
+		digitGroupSeparator : ' ',
+		modifyValueOnWheel: false
+	});
+
+	// $('.js-autonum').autoNumeric({decimalPlaces: 0, digitGroupSeparator: ' '});
 });

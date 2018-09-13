@@ -189,7 +189,7 @@ p
 	&__switcher
 		margin: 0
 		padding: 0
-		&-item
+		&-item, .tab
 			display: inline-block
 			vertical-align: top
 			background: #EEF3F8
@@ -206,12 +206,16 @@ p
 			-moz-transition: all .25s
 			transition: all .25s
 			&:hover
-				border: 1px solid $blue
+				border-color: $blue
 			&._active
 				background: $blue
 				border-color: $blue
 				color: #ffffff
-		&-content
+	&__content
+		&-item
+			display: none
+			&._active
+				display: block
 	&__item
 		display: none
 		&._active

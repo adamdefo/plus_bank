@@ -111,7 +111,9 @@
 
 		// сумма
 		this.$summaCtrl = this.$el.querySelector('.summa');
+		this.maxSumma = this.$summaCtrl.dataset.max;
 		this.$summaSlider = this.$el.querySelector('#summa-slider');
+		this.$summaProgress = this.$el.querySelector('.js-input-progress');
 
 		// пополнение в месяц
 		this.$refilCtrl = this.$el.querySelector('.refil');
@@ -126,25 +128,31 @@
 
 		this.$resultItems = this.$el.querySelectorAll('.calculator__result-item');
 
+		// название тарифа
+		this.$tariffName = this.$el.querySelector('.js-tariff-name');
+
 		// сколько получит клиент
-		this.$totalEl = this.$el.querySelectorAll('.js-total');
+		this.$totalEl = this.$el.querySelector('.js-total');
 
 		// ставка
-		this.$rateEl = this.$el.querySelectorAll('.js-rate');
+		this.$rateEl = this.$el.querySelector('.js-rate');
 
 		// срок
-		this.$periodEl = this.$el.querySelectorAll('.js-period');
+		this.$periodEl = this.$el.querySelector('.js-period');
 
 		// общий доход
-		this.$profitEl = this.$el.querySelectorAll('.js-profit'); 
+		this.$profitEl = this.$el.querySelector('.js-profit'); 
 
 		// доход в месяц 
-		this.$profitInMonthEl = this.$el.querySelectorAll('.js-profit-in-month');
+		this.$profitInMonthEl = this.$el.querySelector('.js-profit-in-month');
 
 		// тарифы
 		this.$tarifflist = this.$el.querySelectorAll('.js-tariff');
 		// данные по каждому тарифу
 		this.tariffs = [];
+
+		// тариф подходящий под выбранные параметры
+		this.selectedTariff = {};
 
 		this._init();
 	};
@@ -166,12 +174,17 @@
 	// создаем для каждого тарифа свой объект
 	Calculator.prototype._initTariffs = function () {
 		var self = this;
-		this.$tarifflist.forEach(function (tariff) {
+		this.$tarifflist.forEach(function (tariff, index) {
 			self.tariffs.push({
+				id: index,
+				name: tariff.dataset.name,
+				rate: tariff.dataset.rate,
+				minRefil: tariff.dataset.minrefil,
+				minSrok: tariff.dataset.minsrok,
+				percentType: tariff.dataset.percenttype,
 				total: 0,
 				profit: 0,
 				profitInMonth: 0,
-				rate: tariff.querySelector('.js-rate').dataset.rate
 			});
 		});
 	};
@@ -182,6 +195,7 @@
 		// проставляет в инпуте значение
 		this.$summaCtrl.value = this._params.summa
 		this.$summaSlider.value = this._params.summa;
+		this.calculateProgressFill();
 
 		if (this.$refilCtrl) {
 			this.$refilCtrl.value = this._params.refil;
@@ -199,14 +213,15 @@
 
 	Calculator.prototype.updateInputValue = function (input, value, paramKey) {
 		input.value = value;
-		this._params[paramKey] = value
+		this._params[paramKey] = value;
+		this.calculateProgressFill();
 	};
 
 	Calculator.prototype._initEvents = function () {
 		var self = this;
-
 		this.$summaCtrl.addEventListener('change', function () {
 			self._params.summa = this.value;
+			self.calculateProgressFill();
 			self.calculate();
 		});
 
@@ -228,7 +243,7 @@
 		}
 
 		this.$periodSelect.addEventListener('change', function () {
-			self._params.period = this.value
+			self._params.period = Number(this.value);
 			self.calculate();
 		});
 
@@ -239,101 +254,75 @@
 			});
 		});
 	};
-
-	Calculator.prototype.calculate = function () {
-		var self = this;
-
-		var summa = Number(this._params.summa),
-				refil = Number(this._params.refil);
-
-		this.tariffs.forEach(function(tariff) {
-			tariff.total = summa;
-			if (self._params.percentType === 'every-month') {
-				for ( var i = 1; i <= self._params.period; i++ ) {
-					tariff.profit += (tariff.total) * (tariff.rate / 12 / 100);
-					tariff.total += refil;
-				}
-				tariff.total += tariff.profit;
-			} else {
-				for ( var i = 1; i <= self._params.period; i++ ) {
-					var profit = (tariff.total) * (tariff.rate / 12 / 100);
-					tariff.total += refil + profit;
-				}
-				tariff.profit = tariff.total - (self._params.summa + refil * self._params.period);
-			}
-			tariff.profitInMonth = tariff.profit / self._params.period;
-		});
-
-		this._outData();
-	};
-
-	Calculator.prototype._outTotalSumma = function () {
-		var self = this;
-		this.$totalEl.forEach(function(el, index) {
-			el.innerText = Math.floor(self.tariffs[index].total);
-		})
-	};
-
-	Calculator.prototype._outProfit = function () {
-		var self = this;
-		this.$profitEl.forEach(function(el, index) {
-			el.innerText = Math.floor(self.tariffs[index].profit);
-		})
-	};
-
-	Calculator.prototype._outProfitInMonth = function () {
-		var self = this;
-		this.$profitInMonthEl.forEach(function(el, index) {
-			el.innerText = Math.floor(self.tariffs[index].profitInMonth);
-		})
-	};
-
-	Calculator.prototype._outRates = function () {
-		this.$rateEl.forEach(function(el) {
-			el.innerText = el.dataset.rate + '%';
-		})
-	};
-
-	Calculator.prototype._outPeriods = function () {
-		var self = this;
-		this.$periodEl.forEach(function(el) {
-			el.innerText = self._params.period + ' мес.';
-		})
+	
+	Calculator.prototype.calculateProgressFill = function () {
+		this.$summaProgress.style.width = (this._params.summa * 100) / this.maxSumma + '%';
 	};
 
 	// выделяет подходящий тариф
 	Calculator.prototype._selectTarif = function () {
-		this._unselectTarif();
-		if (this._params.summa < 1999999) {
-			classie.add(this.$resultItems[0], '_active');
-		} else if (this._params.summa > 2000000 && this._params.summa < 2499999) {
-			classie.add(this.$resultItems[1], '_active');
-		} else {
-			classie.add(this.$resultItems[2], '_active');
-		}
+		var self = this;
+		var selectedTariff = this.tariffs.filter(function(tariff) {
+			return (Number(tariff.minSrok) === self._params.period && 
+				tariff.percentType === self._params.percentType
+				// tariff.minRefil >= self._params.refil
+			);
+		})
+
+		this.selectedTariff = Object.assign({}, selectedTariff[0]);
+		this.$tariffName.innerText = this.selectedTariff.name;
 	};
 
-	// снимает выделение с тарифов
-	Calculator.prototype._unselectTarif = function () {
-		this.$resultItems.forEach(function(el) {
-			classie.remove(el, '_active');
-		});
+	Calculator.prototype._outTotalSumma = function () {
+		this.$totalEl.innerText = Math.floor(this.selectedTariff.total);
 	};
 
-	Calculator.prototype._outData = function () {
+	Calculator.prototype._outProfit = function () {
+		this.$profitEl.innerText = Math.floor(this.selectedTariff.profit);
+	};
+
+	Calculator.prototype._outProfitInMonth = function () {
+		this.$profitInMonthEl.innerText = Math.floor(this.selectedTariff.profitInMonth);
+	};
+
+	Calculator.prototype._outRate = function () {
+		this.$rateEl.innerText = this.selectedTariff.rate + '%';
+	};
+
+	Calculator.prototype._outPeriods = function () {
+		this.$periodEl.innerText = this._params.period + ' мес.';
+	};
+
+	Calculator.prototype.calculate = function () {
 		this._selectTarif();
-		this._outTotalSumma();
-		this._outProfit();
-		this._outProfitInMonth();
-		this._outRates();
-		this._outPeriods();
+		var summa = Number(this._params.summa),
+			refil = Number(this._params.refil);
+
+		this.selectedTariff.total = summa;
+		if (this._params.percentType === 'every-month') {
+			for ( var i = 1; i <= this._params.period; i++ ) {
+				this.selectedTariff.profit += (this.selectedTariff.total) * (this.selectedTariff.rate / 12 / 100);
+				this.selectedTariff.total += refil;
+			}
+			this.selectedTariff.total += Math.floor(this.selectedTariff.profit);
+		} else {
+			for ( var i = 1; i <= this._params.period; i++ ) {
+				var profit = (this.selectedTariff.total) * (this.selectedTariff.rate / 12 / 100);
+				this.selectedTariff.total += refil + profit;
+			}
+			this.selectedTariff.profit = this.selectedTariff.total - (this._params.summa + refil * this._params.period);
+		}
+		this.selectedTariff.profitInMonth = this.selectedTariff.profit / this._params.period;
+
+		this._outData();
 	};
 
 	Calculator.prototype.generateTblReport = function (tariff) {
 		var rows = '';
 		var summa = Number(this._params.summa),
-				refil = Number(this._params.refil);
-		var profit = 0;
+			refil = Number(this._params.refil),
+			profit = 0;
+
 		for (var i = 1; i <= this._params.period; i++) {
 			rows += '<tr>';
 			rows += '<td>' + i + '</td>';
@@ -358,6 +347,28 @@
 		}
 
 		return rows;
+	};
+
+	Calculator.prototype.generatePdfHref = function (tariff, phone, coords) {
+		return '/pdf/calc.php' +
+			'?program_name=' + tariff.name +
+			'&summa=' + this._params.summa +
+			'&total=' + tariff.total +
+			'&profit=' + Math.floor(tariff.profit) +
+			'&profit_in_month=' + Math.floor(tariff.profitInMonth) +
+			'&rate=' + tariff.rate +
+			'&period=' + this._params.period +
+			'&payment_type=' + this._params.percentType +
+			'&phone=' + phone +
+			'&coords=' + coords;
+	};
+
+	Calculator.prototype._outData = function () {
+		this._outTotalSumma();
+		this._outProfit();
+		this._outProfitInMonth();
+		this._outRate();
+		this._outPeriods();
 	};
 
 	window.Calculator = Calculator;

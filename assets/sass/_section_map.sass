@@ -29,20 +29,20 @@
 		&-item
 			display: inline-block
 			vertical-align: top
-			background: rgba(12, 84, 160, 0.07)
-			border: 0
+			background: #EEF3F8
+			border: 1px solid #EEF3F8
 			border-radius: 5px
 			color: $blue
 			font-size: 1.9rem
 			margin-right: 12px
 			margin-bottom: 16px
-			padding: 13px 15px
+			padding: 11px 15px
 			outline: none
 			-webkit-transition: all .25s
 			-moz-transition: all .25s
 			transition: all .25s
 			&:hover
-				color: $link_hover
+				border: 1px solid $blue
 			&._active
 				background: $blue
 				color: #ffffff
@@ -52,7 +52,8 @@
 				display: block
 
 @media (max-width: 1160px)
-	.map
-		&__box
-			width: 500px
-			margin-left: 70px
+	.section_map
+		& .map
+			&__box
+				width: 500px
+				margin-left: 70px

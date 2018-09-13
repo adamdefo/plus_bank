@@ -14,6 +14,9 @@ html
 				include inc/section_about
 				include inc/section_map
 		include inc/footer
+
+		//- include inc/print
+
 		.md.md-callback
 			.md__overlay
 			.md__container
@@ -99,10 +102,39 @@ html
 					.md__content
 						.tabs.js-tabs
 							ul.tabs__switcher
-								li.tabs__switcher-item Сезонный плюс
-								li.tabs__switcher-item Годовой плюс
-								li.tabs__switcher-item Стабильный плюс
-							.tabs__switcher-content
-								.tabs__item Сезонный плюс
-								.tabs__item Годовой плюс
-								.tabs__item Стабильный плюс
+								li.tab(data-tab="0") Сезонный плюс
+								li.tab(data-tab="1") Годовой плюс
+								li.tab(data-tab="2") Стабильный плюс
+							.tabs__content
+								.tabs__content-item(data-tab="0") Сезонный плюс
+								.tabs__content-item(data-tab="1") Годовой плюс
+								.tabs__content-item(data-tab="2") Стабильный плюс
+		
+		//- модалка с картой
+		.md.md-map.js-md_map
+			.md__overlay
+			.md__container
+				.md__inner
+					.md-close.js-md-close Закрыть
+					.md__content
+						.md__content-tabs
+							.map__title
+								h2.ttl.ttl_h2 Адреса офисов
+							.map__content
+								.tabs.js-tabs-map.row
+									.tabs__switcher.col.col-6
+										button.tabs__switcher-item(data-coords="55.74818547347099,37.6238328451877") Горьковский
+										button.tabs__switcher-item(data-coords="55.75729498607369,37.61409483032777") Московские ворота
+										button.tabs__switcher-item(data-coords="55.75815692454939,37.63876738498264") Новочеркасский
+									.tabs__switcher-content.col.col-6
+										.tabs__item
+											p ул. Малая Посадская, дом 4а, лит. А, пом. 1-H Пн – Пт: 9:00 – 19:00, без перерыва. Сб, Вс: выходной
+										.tabs__item
+											p ул. Московские ворота
+										.tabs__item
+											p ул. Новочеркасский
+										.map__save-scheme
+											a.btn.js-save-scheme
+												span Сохранить схему проезда
+							
+						#map-modal.map-modal

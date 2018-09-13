@@ -30,8 +30,10 @@
         text-align: left
     &__input-box
         position: relative
+        border-radius: 5px
         width: 100%
         max-width: 256px
+        overflow: hidden
         &.select
             width: 176px
         &.rubl:after
@@ -43,6 +45,7 @@
             right: 10px
             line-height: 1
     &__input
+        position: relative
         display: inline-block
         vertical-align: top
         background-color: transparent
@@ -55,6 +58,7 @@
         padding: 9px 30px 10px 15px
         width: 100%
         outline: none
+        z-index: 20
         -webkit-transition: border-color .25s
         -moz-transition: border-color .25s
         transition: border-color .25s
@@ -62,16 +66,20 @@
             border: 1px solid rgba(255,255,255,.75)
             cursor: pointer
         &:focus
-            background-color: #ffffff
             border: 1px solid rgba(255,255,255,1)
-            color: #161924
             cursor: text
-            & ~ .calculator__input-box.rubl:after
-                color: #161924
+        &-progress
+            background-color: rgba(255, 255, 255, 0.15)
+            position: absolute
+            top: 0
+            left: 0
+            height: 100%
+            width: 0
+            z-index: 10
     &__rangeslider
         position: relative
         width: 100%
-        max-width: 202px
+        z-index: 30
     &__result
         position: relative
         margin-top: -10px
@@ -81,27 +89,24 @@
         & .col
             padding: 0 10px
         &-item
+            background: #F2F8FD
             border-radius: 10px
             padding: 48px 30px 38px
-            & .btn
-                display: none
-                width: 100%
-            &._active
-                background: #F2F8FD
-                & .btn
-                    display: block
-            &_get
-                font-size: 3rem
-                font-weight: 600
-                line-height: 1
-                & label
-                    display: block
     &__program
         font-size: 1.8rem
         font-weight: 400
         margin-top: 15px
 
 .result
+    &__get
+        font-size: 3rem
+        font-weight: 600
+        line-height: 1.2
+        margin-bottom: 5px
+        & label
+            display: block
+        & .rubl:after
+            content: '7'
     &__name
         color: #000000
         font-size: 3.1rem
@@ -109,16 +114,17 @@
         margin-bottom: 10px
     &__footer
         & .links
-            margin: 34px 0
+            margin: 24px 0
         
 
 .links
     position: relative
     width: 100%
     &__item
-        margin-bottom: 15px
+        display: inline-block
+        margin-right: 26px
     &:last-child
-        margin-bottom: 0
+        margin-right: 0
 
 .list
     &-report
@@ -139,6 +145,8 @@
                 vertical-align: middle
                 font-weight: 600
                 margin-left: 5px
+                &.rubl:after
+                    content: '7'
 
 
 
