@@ -1,6 +1,7 @@
 .section_handphone
 	background: #EFF4F9
 	padding: 68px 0 0
+	overflow: hidden
 	z-index: 40
 	.content
 		display: inline-block
@@ -17,8 +18,28 @@
 				font-weight: 600
 				line-height: 1.75
 	.handphone
+		position: relative
 		display: inline-block
 		vertical-align: top
 		margin-top: -65px
 		width: 522px
 		line-height: 0
+		&__msg
+			position: absolute
+			top: 72px
+			right: -70px
+			&:before
+				content: ''
+				display: inline-block
+				vertical-align: top
+				width: 112px
+				height: 112px
+				background: url('../img/duga.svg') 0 0 no-repeat
+			& .txt
+				display: inline-block
+				vertical-align: top
+				margin-top: -10px
+				margin-left: 10px
+				line-height: 24px
+				font-size: 16px
+				width: 233px

@@ -26,6 +26,12 @@ $(function() {
 				return item;
 			}
 		});
+	
+	var $logo = $('.js-logo');
+	$logo.on('click', function (ev) {
+		ev.preventDefault();
+		$('html, body').animate({scrollTop: 0}, 750);
+	});
 
 	// скролинг страницы и установка активного пункта навигации
 	window.addEventListener( 'scroll', function( event ) {
@@ -68,6 +74,15 @@ $(function() {
 	// кнопки Распечатать, Сохранить схему проезда
 	var btnSaveScheme = $('.js-save-scheme');
 
+	// инпут для калькулятора, где вводится Сумма сбережений
+	var calcInputSumma = new AutoNumeric('.js-calc-input-summa',
+	{
+		selectNumberOnly: true,
+		decimalPlaces : 0,
+		digitGroupSeparator : ' ',
+		modifyValueOnWheel: false
+	});
+
 	// ползунок "сумма"
 	var $summaSlider = $('#summa-slider');
 	$summaSlider.rangeslider({
@@ -78,7 +93,6 @@ $(function() {
 			btnSaveScheme.attr('href', calcApp.generatePdfHref(calcApp.selectedTariff, phone, activePlacemark))
 			tabs.setActiveTab(calcApp.selectedTariff.id);
 			calcInputSumma.set(value);
-			totalSumma.set(calcApp.selectedTariff.total);
 		},
 		onSlideEnd: function(position, value) {}
 	});
@@ -87,6 +101,7 @@ $(function() {
 		$summaSlider.val(this.value).change();
 		btnSaveScheme.attr('href', calcApp.generatePdfHref(calcApp.selectedTariff, phone, activePlacemark))
 		tabs.setActiveTab(calcApp.selectedTariff.id);
+		calcInputSumma.set(this.value);
 	});
 
 	// ползунок "пополнение в месяц"
@@ -106,7 +121,6 @@ $(function() {
 	$calculatorSelect.on('change', function () {
 		btnSaveScheme.attr('href', calcApp.generatePdfHref(calcApp.selectedTariff, phone, activePlacemark));
 		tabs.setActiveTab(calcApp.selectedTariff.id);
-		totalSumma.set(calcApp.selectedTariff.total);
 	});
 
 	// маска номера телефона
@@ -133,12 +147,12 @@ $(function() {
 		$('body').addClass('_overflow');
 		$calcProgramModal.addClass('_show');
 		$calcProgramModal.find('.js-program-name').text(tariff.name); // название тарифа
-		$calcProgramModal.find('.js-summa').text(calcApp._params.summa); // сумма сбережения
+		$calcProgramModal.find('.js-summa').text(formatNumber(calcApp._params.summa, false)); // сумма сбережения
 		$calcProgramModal.find('.js-srok').text(calcApp._params.period + ' мес.'); // срок сбережения
-		$calcProgramModal.find('.js-dohod').text(Math.floor(tariff.profit)); // доход по программе
+		$calcProgramModal.find('.js-dohod').text(formatNumber(Math.floor(tariff.profit), false)); // доход по программе
 		$calcProgramModal.find('.js-percent-type').text(calcApp._params.percentType === 'every-month' ? 'ежемесячно' : 'в конце срока'); // выплата процентов
-		$calcProgramModal.find('.js-stavka').text(tariff.rate + '%'); // процентная ставка
-		$calcProgramModal.find('.js-total-itogo').text(Math.floor(tariff.total)); // итого
+		$calcProgramModal.find('.js-stavka').html(tariff.rate + '&thinsp;%'); // процентная ставка
+		$calcProgramModal.find('.js-total-itogo').text(formatNumber(Math.floor(tariff.total), false)); // итого
 
 		var tbody = $calcProgramModal.find('.js-calculator-tbl tbody');
 		tbody.html(calcApp.generateTblReport(tariff));
@@ -328,15 +342,4 @@ $(function() {
 		setActivePlacemark(yaMapModal, $mapSwitcherList.length, this.dataset.coords);
 		btnSaveScheme.attr('href', calcApp.generatePdfHref(calcApp.selectedTariff, phone, activePlacemark));
 	});
-
-
-	var calcInputSumma = new AutoNumeric('.js-calc-input-summa',
-	{
-		selectNumberOnly: true,
-		decimalPlaces : 0,
-		digitGroupSeparator : ' ',
-		modifyValueOnWheel: false
-	});
-
-	// $('.js-autonum').autoNumeric({decimalPlaces: 0, digitGroupSeparator: ' '});
 });

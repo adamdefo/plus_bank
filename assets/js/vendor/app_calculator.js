@@ -1,90 +1,8 @@
-/*!
- * classie v1.0.1
- * class helper functions
- * from bonzo https://github.com/ded/bonzo
- * MIT license
- * 
- * classie.has( elem, 'my-class' ) -> true/false
- * classie.add( elem, 'my-new-class' )
- * classie.remove( elem, 'my-unwanted-class' )
- * classie.toggle( elem, 'my-class' )
- */
-
-( function( window ) {
-
-	'use strict';
-	
-	// class helper functions from bonzo https://github.com/ded/bonzo
-	
-	function classReg( className ) {
-	  return new RegExp("(^|\\s+)" + className + "(\\s+|$)");
-	}
-	
-	// classList support for class management
-	// altho to be fair, the api sucks because it won't accept multiple classes at once
-	var hasClass, addClass, removeClass;
-	
-	if ( 'classList' in document.documentElement ) {
-	  hasClass = function( elem, c ) {
-		return elem.classList.contains( c );
-	  };
-	  addClass = function( elem, c ) {
-		elem.classList.add( c );
-	  };
-	  removeClass = function( elem, c ) {
-		elem.classList.remove( c );
-	  };
-	}
-	else {
-	  hasClass = function( elem, c ) {
-		return classReg( c ).test( elem.className );
-	  };
-	  addClass = function( elem, c ) {
-		if ( !hasClass( elem, c ) ) {
-		  elem.className = elem.className + ' ' + c;
-		}
-	  };
-	  removeClass = function( elem, c ) {
-		elem.className = elem.className.replace( classReg( c ), ' ' );
-	  };
-	}
-	
-	function toggleClass( elem, c ) {
-	  var fn = hasClass( elem, c ) ? removeClass : addClass;
-	  fn( elem, c );
-	}
-	
-	var classie = {
-	  // full names
-	  hasClass: hasClass,
-	  addClass: addClass,
-	  removeClass: removeClass,
-	  toggleClass: toggleClass,
-	  // short names
-	  has: hasClass,
-	  add: addClass,
-	  remove: removeClass,
-	  toggle: toggleClass
-	};
-	
-	// transport
-	if ( typeof define === 'function' && define.amd ) {
-	  // AMD
-	  define( classie );
-	} else if ( typeof exports === 'object' ) {
-	  // CommonJS
-	  module.exports = classie;
-	} else {
-	  // browser global
-	  window.classie = classie;
-	}
-	
-})( window );
-
 /**
+ * Кальлятор по расчёту доходов по вкладам
  * @author Aleksey Kondratyev
  */
-(function(window) {
+// (function(window) {
 
 	'use strict';
 
@@ -97,11 +15,6 @@
 		return a;
 	};
 
-	/**
-	 * Кальлятор по расчёту доходов по вкладам
-	 * @param {*} selector 
-	 * @param {*} params 
-	 */
 	var Calculator = function (selector, params) {
 
 		this._params = extend({}, this._params);
@@ -243,6 +156,7 @@
 		}
 
 		this.$periodSelect.addEventListener('change', function () {
+			this.blur();
 			self._params.period = Number(this.value);
 			self.calculate();
 		});
@@ -274,19 +188,19 @@
 	};
 
 	Calculator.prototype._outTotalSumma = function () {
-		this.$totalEl.innerText = Math.floor(this.selectedTariff.total);
+		this.$totalEl.innerHTML = formatNumber(Math.floor(this.selectedTariff.total), false) + '&thinsp;';
 	};
 
 	Calculator.prototype._outProfit = function () {
-		this.$profitEl.innerText = Math.floor(this.selectedTariff.profit);
+		this.$profitEl.innerHTML = formatNumber(Math.floor(this.selectedTariff.profit), false) + '&thinsp;';
 	};
 
 	Calculator.prototype._outProfitInMonth = function () {
-		this.$profitInMonthEl.innerText = Math.floor(this.selectedTariff.profitInMonth);
+		this.$profitInMonthEl.innerHTML = formatNumber(Math.floor(this.selectedTariff.profitInMonth), false) + '&thinsp;';
 	};
 
 	Calculator.prototype._outRate = function () {
-		this.$rateEl.innerText = this.selectedTariff.rate + '%';
+		this.$rateEl.innerHTML = this.selectedTariff.rate + '&thinsp;%';
 	};
 
 	Calculator.prototype._outPeriods = function () {
@@ -333,13 +247,13 @@
 			profit = (summa) * (tariff.rate / 12 / 100);
 
 			if (this._params.percentType === 'every-month') {
-				rows += '<td class="rubl">' + summa + '</td>';
-				rows += '<td class="rubl">' + refil + '</td>';
-				rows += '<td class="rubl">' + Math.floor(profit) + '</td>';
+				rows += '<td class="rubl">' + formatNumber(summa, false) + '</td>';
+				rows += '<td class="rubl">' + formatNumber(refil, false) + '</td>';
+				rows += '<td class="rubl">' + formatNumber(Math.floor(profit), false) + '</td>';
 			} else {
-				rows += '<td class="rubl">' + Math.floor(summa) + '</td>';
-				rows += '<td class="rubl">' + refil + '</td>';
-				rows += '<td class="rubl">' + Math.floor(profit) + '</td>';
+				rows += '<td class="rubl">' + formatNumber(Math.floor(summa), false) + '</td>';
+				rows += '<td class="rubl">' + formatNumber(refil, false) + '</td>';
+				rows += '<td class="rubl">' + formatNumber(Math.floor(profit), false) + '</td>';
 				summa += profit;
 			}
 
@@ -350,7 +264,7 @@
 	};
 
 	Calculator.prototype.generatePdfHref = function (tariff, phone, coords) {
-		return '/pdf/calc.php' +
+		return '/pdf/' +
 			'?program_name=' + tariff.name +
 			'&summa=' + this._params.summa +
 			'&total=' + tariff.total +
@@ -371,6 +285,6 @@
 		this._outPeriods();
 	};
 
-	window.Calculator = Calculator;
+	//window.Calculator = Calculator;
 
-})(window);
+// })(window);
